@@ -1,5 +1,3 @@
 import Button from './atomics/Button'
 
-export  {
-    Button
-}
+export const Bouton = Button;
