@@ -1,5 +1,1 @@
-import Button from './atomics/Button'
-
-export default {
-    Button
-};
+export { default as Button } from './atomics/Button'

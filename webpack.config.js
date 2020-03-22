@@ -30,7 +30,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'react-component-lib.js',
     libraryTarget: 'umd',
-    library: 'react-component-lib',
-    umdNamedDefine: true
+    library: 'react-component-lib'
   },
 };
