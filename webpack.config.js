@@ -1,13 +1,21 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
+  devtool: 'source-map',
+  optimization:{
+    minimize: false
+  },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'awesome-typescript-loader',
         exclude: /node_modules/,
+        query: {
+          declaration: false,
+        }
       },
       {
         test: /\.svg$/,
@@ -22,7 +30,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
     libraryTarget: 'umd',
-    library: 'MyReactComponentLib',
+    library: 'react-component-lib',
     umdNamedDefine: true
   },
 };
