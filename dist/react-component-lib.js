@@ -3235,9 +3235,6 @@ exports.isValidElementType=function(a){return"string"===typeof a||"function"===t
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "Button", function() { return /* reexport */ Button; });
-
 // EXTERNAL MODULE: ./node_modules/react/index.js
 var react = __webpack_require__(0);
 var react_default = /*#__PURE__*/__webpack_require__.n(react);
@@ -3278,7 +3275,9 @@ var templateObject_1;
 
 // CONCATENATED MODULE: ./src/index.tsx
 
-
+/* harmony default export */ var src = __webpack_exports__["default"] = ({
+    Button: Button
+});
 
 
 /***/ })

@@ -1,5 +1,5 @@
 import Button from './atomics/Button'
 
-export {
+export default {
     Button
 };
