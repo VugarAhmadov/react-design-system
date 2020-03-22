@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import {ReactComponent as IconCheck} from '../../resources/icon-check.svg'
+import IconCheck from '../../resources/icon-check'
 
 interface StyledProps {
     height: number;
@@ -135,7 +135,7 @@ export default (props :ButtonProps) => {
         bloqued={(props.onlyOneClick && cliqued)}
         >
             <div>{props.children}</div>
-            <IconCheck className="valid"/>
+            <IconCheck classe="valid"/>
         </Bouton>
     )
 }
