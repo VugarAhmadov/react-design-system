@@ -3236,7 +3236,7 @@ exports.isValidElementType=function(a){return"string"===typeof a||"function"===t
 __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "Bouton", function() { return /* binding */ src_Bouton; });
+__webpack_require__.d(__webpack_exports__, "Button", function() { return /* reexport */ Button; });
 
 // EXTERNAL MODULE: ./node_modules/react/index.js
 var react = __webpack_require__(0);
@@ -3278,7 +3278,7 @@ var templateObject_1;
 
 // CONCATENATED MODULE: ./src/index.tsx
 
-var src_Bouton = Button;
+
 
 
 /***/ })
