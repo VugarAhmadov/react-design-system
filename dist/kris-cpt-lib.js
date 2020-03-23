@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["react"], factory);
 	else if(typeof exports === 'object')
-		exports["react-component-lib"] = factory(require("react"));
+		exports["kris-cpt-lib"] = factory(require("react"));
 	else
-		root["react-component-lib"] = factory(root["React"]);
+		root["kris-cpt-lib"] = factory(root["React"]);
 })(window, function(__WEBPACK_EXTERNAL_MODULE__0__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -3148,4 +3148,4 @@ var templateObject_1;
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=react-component-lib.js.map
+//# sourceMappingURL=kris-cpt-lib.js.map

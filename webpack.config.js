@@ -45,8 +45,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'react-component-lib.js',
+    filename: 'kris-cpt-lib.js',
     libraryTarget: 'umd',
-    library: 'react-component-lib'
+    library: 'kris-cpt-lib'
   },
 };
