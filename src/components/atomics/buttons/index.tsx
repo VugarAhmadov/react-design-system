@@ -75,9 +75,7 @@ svg.valid {
     transition: all 250ms 250ms ease-in-out;
 }
 
-${props => 
-
-props.bloqued ? `
+${props => props.bloqued ? `
     width: ${props.height}px;
     cursor: not-allowed;
     &:hover {
@@ -112,13 +110,13 @@ export interface ButtonProps {
     color2: string;
     color1Pos: number;
     onlyOneClick: boolean;
-    onClick:  (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+    onClick:  (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
     children: React.ReactNode;
 }
 
 export default (props :ButtonProps) => {
     const [cliqued, setCliqued] = useState(false);
-    const handleCliqued = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const handleCliqued = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         if (props.onlyOneClick && cliqued) return;
         setCliqued(true)
         props.onClick(event)

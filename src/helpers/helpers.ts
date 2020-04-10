@@ -1,14 +1,18 @@
-export function isNumeric(x :string) {
+import { Moment } from 'moment'
 
-    return !isNullOrUndefined(x) && x !== "" && !isNaN(x);
+export function isNumeric(x:string|number)  :boolean {
+    return !ObjectIsNullOrUndefined(x) && x !== "" && !isNaN(parseInt(x.toString()));
 }
 
-export function isNullOrUndefined(x :string) {
-
+export function isNullOrUndefined(x :string) :boolean{
     return x === null || x === undefined;
 }
 
-export function formatDateDMMMYYYY(dateMoment) {
+export function ObjectIsNullOrUndefined(x :any) :boolean {
+    return x === null || x === undefined;
+}
+
+export function formatDateDMMMYYYY(dateMoment :Moment) :string{
     if (dateMoment.date() == 1) {
         return dateMoment.date() + "er " + dateMoment.format('MMMM') + " " + dateMoment.year()
     } else {
@@ -16,7 +20,7 @@ export function formatDateDMMMYYYY(dateMoment) {
     }
 }
 
-export function afficherMontant(entree, nbdecimales = 2) {
+export function afficherMontant(entree :string, nbdecimales:number = 2 ) :string{
 
     if (isNullOrUndefined(entree) || entree === "")
         return "";
@@ -37,7 +41,7 @@ export function afficherMontant(entree, nbdecimales = 2) {
     return left_part + "," + right_part + " €";
 }
 
-export const formatNumTel = (numero) => {
+export const formatNumTel = (numero :string) :string => {
 
     let newvalue = "";
     if (numero != undefined && numero != 'NULL') {
@@ -76,7 +80,7 @@ export const formatNumTel = (numero) => {
 };
 
 // Format ; NOM(NOM2)Prenom
-export const formatNomPatient = (NomPat, NomUsuel, Prenom) => {
+export const formatNomPatient = (NomPat :string, NomUsuel:string, Prenom:string) :string => {
 
     var nom_jf = NomPat;
     var nom_usuel = NomUsuel;
@@ -95,7 +99,7 @@ export const formatNomPatient = (NomPat, NomUsuel, Prenom) => {
 
 };
 
-export const formatDateNaissance = (DateNaissance) => {
+export const formatDateNaissance = (DateNaissance :Date) :string=> {
 
     var dateNaiss = DateNaissance == null ? "-" : DateNaissance.toString();
     return dateNaiss;
@@ -103,7 +107,7 @@ export const formatDateNaissance = (DateNaissance) => {
 };
 
 // Format code INSEE x xx xx xx xxx xxx - x
-export const formatINSEE = (numInsee, ClefINSEE) => {
+export const formatINSEE = (numInsee:string|number, ClefINSEE:string|number)  :string => {
     let insee = numInsee == null ? '-' : numInsee.toString();
 
     var clef = ClefINSEE != null ? " - " + ClefINSEE : '';
@@ -121,7 +125,7 @@ export const formatINSEE = (numInsee, ClefINSEE) => {
 
 };
 
-export function formatDate(entree) {
+export function formatDate(entree :string) :string {
 
     let endSlash = entree.endsWith("/");
     let date = entree.replace(/[^\d]/g, "");
@@ -145,17 +149,17 @@ export function formatDate(entree) {
     return sortie;
 }
 
-export function formatNombre(entree) {
+export function formatNombre(entree :string) :string {
     return entree.replace(/^0+(?=.)/, "").replace(/[^\d]/g, "");
 }
 
-export function formatNombreAvecZero(entree) {
+export function formatNombreAvecZero(entree :string) :string{
     return entree.replace(/[^\d]/g, "")
 }
 
-export function formatMontant(entree, nbdecimales = 2) {
+export function formatMontant(entree :string, nbdecimales :number = 2)  :string{
 
-    if (!entree && entree != 0)
+    if (!entree)
         return "";
 
     let tab = entree.replace(",", ".").replace(/[^\d\.]/g, "").split(".");
@@ -173,22 +177,22 @@ export function formatMontant(entree, nbdecimales = 2) {
     return nombre;
 }
 
-export function valideMontant(nombre, montantMax = 9999999.00, montantMin = 0) {
-    if (!isNaN(montantMax) && parseFloat(nombre) > parseFloat(montantMax)) {
+export function valideMontant(nombre :number, montantMax:number = 9999999.00, montantMin:number = 0) :boolean{
+    if (!isNaN(montantMax) && parseFloat(nombre.toString()) > parseFloat(montantMax.toString())) {
         return false;
     }
-    if (!isNaN(montantMin) && parseFloat(nombre) < parseFloat(montantMin)) {
+    if (!isNaN(montantMin) && parseFloat(nombre.toString()) < parseFloat(montantMin.toString())) {
         return false;
     }
     return true;
 }
 
-export function formatLettreCle(entree) {
+export function formatLettreCle(entree:string) :string{
 
     return entree.toUpperCase().substring(0, 5).replace(/[^0-9A-Z,]/g, "");
 }
 
-export function formatCodeActe(entree) {
+export function formatCodeActe(entree:string) :string {
 
     let lettres = entree.toUpperCase().substring(0, 4).replace(/[^A-Z]/g, "");
     let chiffres = entree.substring(4, 7).replace(/[^\d]/g, "");
@@ -196,24 +200,24 @@ export function formatCodeActe(entree) {
     return lettres + chiffres;
 }
 
-export function formatAlphaNumerique(entree) {
+export function formatAlphaNumerique(entree:string) :string {
 
     entree = entree.replace(/[\W_]/g, "");
     return entree;
 }
 
-export function formatNombreDent(entree) {
+export function formatNombreDent(entree:string) :string|number{
 
     entree = formatNombre(entree);
-    if (entree > 32) {
-        entree = 32
-    } else if (entree <= 0) {
-        entree = ""
+    if (parseInt(entree) > 32) {
+        return 32
+    } else if (parseInt(entree) <= 0) {
+        return ""
     }
     return entree;
 }
 
-export function formatPrenom(entree) {
+export function formatPrenom(entree :string) :string{
 
     return entree
         // Suppression de tous les caractères unicode qui ne sont pas des lettres, lettres accentuées, chiffres, espaces, apostrophes, ou tirets

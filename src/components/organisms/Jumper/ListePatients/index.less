@@ -1,0 +1,23 @@
+.scroll-patients {
+    height: 120px;
+    overflow: hidden;
+
+    // À cause d'un bug dans perfect-scrollbar (https://github.com/mdbootstrap/perfect-scrollbar/issues/792)
+    // la scrollbar apparaît à gauche du conteneur
+    // Ceci est un workaround temporaire
+    direction: rtl;
+
+    * {
+        direction: ltr;
+    }
+    // Fin du workaround
+
+    &.scrolled {
+        box-shadow: inset -3px 3px 6px 0px #BEBEBE;
+    }
+
+    &.aucun {
+        height: 71px;
+        overflow: hidden;
+    }
+}

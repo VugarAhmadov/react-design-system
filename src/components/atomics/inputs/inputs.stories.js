@@ -79,7 +79,7 @@ name: 'Input générique avec un placeholder',
 
 
 export default {
-  title: 'Inputs',
+  title: 'Atomes/Inputs/Generiques',
   component: InputsDefault,
 };
 

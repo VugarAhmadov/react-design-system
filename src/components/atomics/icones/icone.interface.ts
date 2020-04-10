@@ -1,6 +1,6 @@
 
 export default interface IconProps{
-    classe :string;
+    classe? :string;
     style? :React.CSSProperties,
     onClick? :(event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void
 }

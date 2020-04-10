@@ -1,9 +1,10 @@
 import React from 'react';
 import { withActions } from '@storybook/addon-actions';
 import Inputs from './index';
+import Textes from '../polices';
 
 export default {
-  title: 'Inputs Spéciaux',
+  title: 'Atomes/Inputs/Speciaux',
   component: Inputs.InputsRpps,
 };
 
@@ -32,11 +33,13 @@ InputsFiness.story = {
 };
 
 export const InputsRecherche = () => (
-  <Inputs.Recherche
-  placeHolder="Ma recherche"
-  lanceRecherche={(value) => console.log(value)}
-  noLabel
-  />
+  <>
+    <Inputs.Recherche
+    placeHolder="Ma recherche"
+    lanceRecherche={(value) => console.log(value)}
+    noLabel
+    />
+  </>
 );
 
 InputsRecherche.story = {

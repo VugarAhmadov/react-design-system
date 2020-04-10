@@ -18,31 +18,37 @@ module.exports = {
     );
     config.module.rules.push(
       {
-        test: /\.(less|css)$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: "css-loader"
-                    },
-                    {
-                        loader: "less-loader",
-                        options: {
-                            plugins: [
-                            //     new autoprefix({
-                            //         remove: false,
-                            //         browsers: [
-                            //             "Chrome >= 52",
-                            //             "FireFox >= 44",
-                            //             "Safari >= 7",
-                            //             "Explorer 11",
-                            //             "last 4 Edge versions"
-                            //         ]
-                            //     })
-                            ]
-                        }
-                    }
+        test: /\.(css)$/,
+        use: [
+            "css-loader"
+        ]
+      },
+      {
+        test: /\.(less)$/,
+        use: [
+            MiniCssExtractPlugin.loader,
+            {
+                loader: "css-loader"
+            },
+            {
+                loader: "less-loader",
+                options: {
+                    plugins: [
+                    //     new autoprefix({
+                    //         remove: false,
+                    //         browsers: [
+                    //             "Chrome >= 52",
+                    //             "FireFox >= 44",
+                    //             "Safari >= 7",
+                    //             "Explorer 11",
+                    //             "last 4 Edge versions"
+                    //         ]
+                    //     })
+                    ]
+                }
+            }
 
-                ]
+        ]
       }
     );
     return config;

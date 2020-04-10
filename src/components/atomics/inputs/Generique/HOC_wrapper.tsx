@@ -25,7 +25,7 @@ export function avecLabelEstErreur(WrappedInput) {
         } = props
 
         // On génère une id unique afin de pouvoir afficher la popup en cas d'erreur
-        const [id, setId] = useState(name + '-' + uuid())
+        const id = name + '-' + uuid()
         const [error, setError] = useState(null);
     
         const handleSetError = (val :React.SetStateAction<null>) => {
