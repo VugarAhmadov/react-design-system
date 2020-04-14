@@ -1,4 +1,4 @@
-import JumperLignePatient from './Jumper/Patient'
+import JumperLignePatient from './patient'
 
 export default {
     Jumper: {

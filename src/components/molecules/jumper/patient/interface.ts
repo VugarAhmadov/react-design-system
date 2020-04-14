@@ -1,5 +1,5 @@
-import NumeroSecuInterface from '../../../../../interfaces/numero_secu'
-import NomPatient from '../../../../../interfaces/nom_patient';
+import NumeroSecuInterface from '../../../../interfaces/numero_secu'
+import NomPatient from '../../../../interfaces/nom_patient';
 
 export interface JumperLignePatientInterface {
     civilite?        :string|undefined;

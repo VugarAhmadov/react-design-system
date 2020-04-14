@@ -2,10 +2,10 @@ import React, {
     useState,
     useEffect
 } from 'react'
-import Block from '../../../../atomics/blocks'
+import Block from '../../../atomics/blocks'
 import styled from 'styled-components'
-import Icone from '../../../../atomics/icones'
-import Polices from '../../../../atomics/polices'
+import Icone from '../../../atomics/icones'
+import Polices from '../../../atomics/polices'
 import {
     JumperLignePatientInterface
 } from './interface'
@@ -14,10 +14,10 @@ import {
     ObjectIsNullOrUndefined,
     formatNomPatient,
     formatPrenom
-} from '../../../../../helpers/helpers'
-import Skeleton from '../../../../atomics/skeleton'
+} from '../../../../helpers/helpers'
+import Skeleton from '../../../atomics/skeleton'
 import moment from 'moment'
-import Ligne from '../../ligne'
+import Ligne from '../../../atomics/ligne'
 
 const BlockNumero = styled.div`
 display:flex;
