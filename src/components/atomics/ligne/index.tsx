@@ -1,5 +1,5 @@
 import React from 'react'
-import Selectable from '../../atomics/listes/selectable'
+import Selectable from '../comportements/selectable'
 import styled from 'styled-components'
 
 const Ligne = styled.div`
