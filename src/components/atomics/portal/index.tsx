@@ -5,16 +5,17 @@ import './style.less'
 
 
 interface ChildProps {
-    cb: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-    style?: React.CSSProperties;
-    children?: ReactElement;
+    cb          :(event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+    style?      : React.CSSProperties;
+    children?   :ReactElement;
 }
 
 interface PortalProps {
     cb: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
-    container: string;
-    fullscreen: boolean;
-    portalStyles: CSSRuleList
+    container   :string;
+    fullscreen? :boolean;
+    portalStyles:React.CSSProperties;
+    children?   :ReactElement;
 }
 
 const Child = (props :ChildProps)  => (

@@ -1,15 +1,17 @@
 import React,{ useState, useEffect } from 'react';
 
 import Inputs from '../';
-import { inputProps } from '../Generique/generique.interface';
+import { inputProps, InputGeneriqueEvent } from '../Generique/generique.interface';
 import Icones from '../../icones'
 
 interface propsRecherche extends inputProps {
-    recherche :string;
-    lanceRecherche :(value :string) => string
+    recherche           :string;
+    onRechercheChange   :(event :InputGeneriqueEvent) => string
+    onReset?            :() => void
+    lanceRecherche      :(value :string) => string;
 }
 
-export default (props) => {
+export default (props :propsRecherche) => {
     
     const [active, setActive] = useState(false);
     const [recherche, setRecherche] = useState("");
@@ -18,13 +20,15 @@ export default (props) => {
         setRecherche(props.recherche)        
     }, [props.recherche])
 
-    const changeRecherche = (value :string) => {
-        setRecherche(value)
-        setActive(value.length > 0)
+    const changeRecherche = (event :InputGeneriqueEvent) => {
+        setRecherche(event.value);
+        setActive(event.value.length > 0);
+        props.onRechercheChange && props.onRechercheChange(event)
     }
     
     const reset = () => {
         setRecherche("");
+        props.onReset && props.onReset()
         setActive(false)
     }
     
@@ -36,7 +40,7 @@ export default (props) => {
             content={recherche}
             name="recherche"
             icone_droite={Icone}
-            onChange={({ value }) => changeRecherche(value)}
+            onChange={(event) => changeRecherche(event)}
             onKeyPress={({ value }) => props.lanceRecherche(value)}
             {...props}
         />

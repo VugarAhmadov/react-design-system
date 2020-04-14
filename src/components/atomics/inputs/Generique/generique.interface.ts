@@ -1,4 +1,4 @@
-interface InputGeneriqueEvent {
+export interface InputGeneriqueEvent {
     value :string;
     isValid :boolean;
     key? :string;

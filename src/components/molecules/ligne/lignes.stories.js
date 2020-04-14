@@ -60,7 +60,7 @@ LignePatientCpt.story = {
 };
 
 export default {
-    title: 'Molecules/Jumper/LignePatient',
+    title: 'Molecules/Ligne/Jumper/LignePatient',
     name: 'Jumper / Ligne Patient',
     component: LignePatientCpt,
   };

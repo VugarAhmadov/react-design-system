@@ -109,6 +109,7 @@ const InputGenerique = (props :inputProps) => {
                 style={inputStyles}
                 disabled={props.disabled}
                 required={props.required}
+                autoComplete="off"
             />
             {props.icone_droite && 
                <div className={"icone_droite"} style={{...iconeStyles, right:0}}>
