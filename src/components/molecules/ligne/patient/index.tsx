@@ -17,7 +17,7 @@ import NomPatient from '../../../../interfaces/nom_patient';
 import { handleClickInterface } from '../../../../interfaces/handle_click'
 
 export interface JumperLignePatientInterface {
-    id                  :string|number;
+    id?                 :string|number;
     civilite?           :string|undefined;
     patient?            :NomPatient|undefined;
     dateNaissance?      :string|undefined;

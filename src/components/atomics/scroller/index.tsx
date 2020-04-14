@@ -6,16 +6,15 @@ import styled from 'styled-components'
 // styles.use();
 
 export interface ScrollbarInterface {
-    option :any;
-    onYReachStart :(container: HTMLElement) => void
-    onYReachEnd :(container: HTMLElement) => void
-    onScrollDown :(container: HTMLElement) => void
-    onScrollY :(container: HTMLElement) => void
-    children :React.ReactElement;
-    className :string;
-    width :string;
-    
-    height :string;
+    option?         :any;
+    onYReachStart?  :(container: HTMLElement) => void
+    onYReachEnd?    :(container: HTMLElement) => void
+    onScrollDown?   :(container: HTMLElement) => void
+    onScrollY?      :(container: HTMLElement) => void
+    children?       :React.ReactElement;
+    className?      :string;
+    width?          :string;
+    height?         :string;
 }
 
 const Wrapper = styled.div`

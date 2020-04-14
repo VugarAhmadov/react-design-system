@@ -1,18 +1,18 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import Jumper from '../../../molecules/jumper/index'
+import Jumper from '../../../molecules/ligne/index'
 import {
     JumperLignePatientInterface
-} from '../../../../components/molecules/jumper/patient'
+} from '../../../molecules/ligne/patient'
 import { uuid } from 'uuidv4'
 import { handleClickInterface } from '../../../../interfaces/handle_click'
 import Scroller from '../../../atomics/scroller'
 
 const Wrapper = styled.div`
 overflow: hidden;
-height: ${(props :React.CSSProperties) => props.height ? props.height : '100%'};
-width: ${(props :React.CSSProperties) => props.width ? props.width : '100%'};
+height: ${(props :ListePatientsInterface) => props.height ? props.height : '100%'};
+width: ${(props :ListePatientsInterface) => props.width ? props.width : '100%'};
 `
 
 export interface ListePatientsInterface {
@@ -24,6 +24,8 @@ export interface ListePatientsInterface {
     onSelect            :(event: handleClickInterface) => handleClickInterface;
     onLigneClick        :(event: handleClickInterface) => handleClickInterface;
     ligneStyle?         :React.CSSProperties;
+    height?             :string;
+    width?              :string;
 }
 
 const listePatientCpt = (props :ListePatientsInterface) => {
