@@ -1,14 +1,8 @@
-import React, {
-    useState,
-    useEffect
-} from 'react'
+import React from 'react'
 import Block from '../../../atomics/blocks'
 import styled from 'styled-components'
 import Icone from '../../../atomics/icones'
 import Polices from '../../../atomics/polices'
-import {
-    JumperLignePatientInterface
-} from './interface'
 
 import {
     ObjectIsNullOrUndefined,
@@ -18,6 +12,28 @@ import {
 import Skeleton from '../../../atomics/skeleton'
 import moment from 'moment'
 import Ligne from '../../../atomics/ligne'
+import NumeroSecuInterface from '../../../../interfaces/numero_secu'
+import NomPatient from '../../../../interfaces/nom_patient';
+import { handleClickInterface } from '../../../../interfaces/handle_click'
+
+export interface JumperLignePatientInterface {
+    id                  :string|number;
+    civilite?           :string|undefined;
+    patient?            :NomPatient|undefined;
+    dateNaissance?      :string|undefined;
+    numTel1?            :string|undefined;
+    numTel2?            :string|undefined;
+    numSecu?            :NumeroSecuInterface|undefined;
+    //rendezVous          :string;
+    pratReferent?       :string|undefined;
+    selectable          :boolean;
+    selected            :boolean;
+    selectablePosition? :string;
+    onSelect            :(event :handleClickInterface) => handleClickInterface;
+    onLigneClick        :(event :handleClickInterface) => handleClickInterface;
+    ligneStyle?         :React.CSSProperties;
+    children?           :React.ReactElement;
+}
 
 const BlockNumero = styled.div`
 display:flex;

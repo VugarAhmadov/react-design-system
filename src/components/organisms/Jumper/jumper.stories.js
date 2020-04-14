@@ -8,7 +8,7 @@ import moment from 'moment'
 import Scroller from '../../atomics/scroller'
 import './ListePatients/index.less'
 
-const initialState :JumperLignePatientInterface = {
+const initialState = {
     patient:{
         nom: 'issner',
         nom_usuel:'issner',
@@ -22,12 +22,16 @@ const initialState :JumperLignePatientInterface = {
     civilite: 'mademoiselle',
     numTel1: '0383568974',
     numTel2: '',
+    selected: false,
     pratReferent: 'DR FOLLE Amour'
 }
-const listePatient= [initialState, initialState, initialState, initialState]
+const listePatient= [{id: 1, ...initialState}, {id: 2, ...initialState}, {id: 3, ...initialState}, {id: 4, ...initialState}]
+
+
 
 export const LignePatientCpt = () => {
-    const [patients, setPatients] = useState(null)
+    const [patients, setPatients] = useState(listePatient)
+    const [selectableBool, setSelectable] = useState(false)
     useEffect(() => {
         setTimeout(() => {
             if (patients && patients.length > 0 ) {
@@ -36,12 +40,28 @@ export const LignePatientCpt = () => {
             return setPatients(listePatient)
         }, 5000)
     }, [patients])
+
+    const handleOnSelect = (evenement) => {
+        let pat = patients.find(p => p.id === evenement.id);
+        if (pat) {
+            pat.selected = !pat.selected
+        }
+        setPatients([...listePatient])
+    }
+
+    const handleLigneClick = () => {
+        console.log("JE CLIQUE SUR LA LIGNE")
+        setSelectable(!selectableBool)
+    }
+
     return (
-        <>test</>
-        // <ListePatient
-        // patients={patients}
-        // height={'120px'}
-        // />
+        <ListePatient
+        patients={patients}
+        height={'120px'}
+        onSelect={handleOnSelect}
+        onLigneClick={handleLigneClick}
+        selectable={selectableBool}
+        />
     ) 
 };
 

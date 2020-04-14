@@ -1,6 +1,7 @@
 import React from 'react'
 import Selectable from '../comportements/selectable'
 import styled from 'styled-components'
+import { handleClickInterface } from '../../../interfaces/handle_click'
 
 const Ligne = styled.div`
 height: ${(props :any) => props.height ? props.height : '60px'};
@@ -18,15 +19,15 @@ export interface LigneInterface {
     selectable          :boolean;
     selected            :boolean;
     selectablePosition? :string;
-    onSelect            :(event: React.SyntheticEvent<HTMLDivElement, MouseEvent>) => void;
-    onLigneClick        :(event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+    onSelect            :(event: handleClickInterface) => handleClickInterface;
+    onLigneClick        :(event: handleClickInterface) => handleClickInterface;
     ligneStyle?         :React.CSSProperties;
     children?           :React.ReactElement;
 }
 
 export default (props :LigneInterface) => {
     return (
-        <Ligne style={{...props.ligneStyle}} onClick={props.onLigneClick} {...props}>
+        <Ligne style={{...props.ligneStyle}} onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => props.onLigneClick({event: event, props: props})} {...props}>
             <Selectable
             selectablePosition={props.selectablePosition}
             selectable={props.selectable}

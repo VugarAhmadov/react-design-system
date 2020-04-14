@@ -7,6 +7,7 @@ import Lignes from '.'
 import moment from 'moment';
 
 const initialState = {
+  id: 1,
   patient:{
     nom: 'issner',
     nom_usuel:'issner',

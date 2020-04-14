@@ -1,4 +1,4 @@
-import React, { useEffect, ReactElement } from 'react'
+import React, { useEffect, ReactElement, useCallback, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
 import './style.less'
@@ -25,39 +25,42 @@ const Child = (props :ChildProps)  => (
 
 
 const Portal = (props: PortalProps) => {
-    let DOMContainer :HTMLElement|null;
+    let DOMContainer = useRef() as React.MutableRefObject<HTMLElement|null>;
     let DOMWrapperElement :HTMLElement = document.createElement('div');
     DOMWrapperElement.id = "portal-container"
     
-    const toggleActif = () => {
-        const { fullscreen } = props
-        let styles = props.portalStyles || {}
-        for (let [key, value] of Object.entries(styles)) {
-            DOMWrapperElement.style[key] = value;
-        }
-        DOMContainer = document.querySelector(props.container)
-        if (DOMContainer) {
-            (fullscreen) ? DOMWrapperElement.classList.add('fullsize') : DOMWrapperElement.classList.remove('fullsize')
-            DOMContainer.appendChild(DOMWrapperElement)
-        } else {
-            throw new Error('PORTAL MOUNT: Div container manquante !')
-        }
-    }
+    const toggleActif = useCallback(
+        () => {
+            let styles = props.portalStyles || {}
+            for (let [key, value] of Object.entries(styles)) {
+                DOMWrapperElement.style[key] = value;
+            }
+            DOMContainer.current = document.querySelector(props.container)
+            if (DOMContainer) {
+                (props.fullscreen) ? DOMWrapperElement.classList.add('fullsize') : DOMWrapperElement.classList.remove('fullsize')
+                DOMContainer.current?.appendChild(DOMWrapperElement)
+            } else {
+                throw new Error('PORTAL MOUNT: Div container manquante !')
+            }
+        },
+        [props, DOMWrapperElement, DOMContainer],
+      );
+      
 
     useEffect(() => {
         toggleActif()
         return () => {
-            if (DOMContainer) {
-                DOMContainer.removeChild(DOMWrapperElement)
+            if (DOMContainer.current) {
+                DOMContainer.current.removeChild(DOMWrapperElement)
             } else {
                 throw new Error('PORTAL UNMOUNT: Div container manquante !')
             }
         }
-    }, [])
+    }, [DOMContainer, toggleActif, DOMWrapperElement])
 
     useEffect(() => {
         toggleActif()
-    }, [props.fullscreen])
+    }, [props.fullscreen, toggleActif])
 
     return createPortal(<Child  {...props}/>, DOMWrapperElement)
 }

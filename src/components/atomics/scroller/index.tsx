@@ -29,18 +29,18 @@ const Scrollbar = (props :ScrollbarInterface) => {
             <PerfectScrollbar
                 className={props.className}
                 option={props.option}
-                onYReachStart={(container) => {
+                onYReachStart={(container :any) => {
                     container.classList.remove("scrolled");
                     props.onYReachStart && props.onYReachStart(container)
                 }}
-                onYReachEnd={(container) => {
+                onYReachEnd={(container :any) => {
                     props.onYReachEnd && props.onYReachEnd(container)
                 }}
-                onScrollDown={(container) => {
+                onScrollDown={(container :any) => {
                     container.classList.add("scrolled")
                     props.onScrollDown && props.onScrollDown(container)
                 }}
-                onScrollY={(container) => {
+                onScrollY={(container :any) => {
                     props.onScrollY && props.onScrollY(container)
                 }}
             >

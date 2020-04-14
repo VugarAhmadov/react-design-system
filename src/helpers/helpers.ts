@@ -13,7 +13,7 @@ export function ObjectIsNullOrUndefined(x :any) :boolean {
 }
 
 export function formatDateDMMMYYYY(dateMoment :Moment) :string{
-    if (dateMoment.date() == 1) {
+    if (dateMoment.date() === 1) {
         return dateMoment.date() + "er " + dateMoment.format('MMMM') + " " + dateMoment.year()
     } else {
         return dateMoment.format("LL")
@@ -28,7 +28,7 @@ export function afficherMontant(entree :string, nbdecimales:number = 2 ) :string
     let nombre = entree.toString().replace(",", ".");
     let montant = parseFloat(nombre);
 
-    if (!montant && montant != 0)
+    if (!montant && montant !== 0)
         return '';
 
     if (montant % 1 === 0)
@@ -44,7 +44,7 @@ export function afficherMontant(entree :string, nbdecimales:number = 2 ) :string
 export const formatNumTel = (numero :string) :string => {
 
     let newvalue = "";
-    if (numero != undefined && numero != 'NULL') {
+    if (numero !== undefined && numero !== 'NULL') {
         // numéro recus de l'api sans espaces ni points
         let numFormated = numero.replace(/[\.\s]+/g, "");
         // future value
@@ -56,16 +56,16 @@ export const formatNumTel = (numero :string) :string => {
             var num = numFormated.charAt(i);
 
             // si pair
-            if (numFormated.length % 2 == 0) {
+            if (numFormated.length % 2 === 0) {
 
-                if (i % 2 == 0) {
+                if (i % 2 === 0) {
                     newvalue += " ";
                 }
                 newvalue += `${num}`;
             }
             else {
                 // sinon impair
-                if ((i > 0) && (i % 3 == 0)) {
+                if ((i > 0) && (i % 3 === 0)) {
                     newvalue += " ";
                 }
                 newvalue += `${num}`;
@@ -84,12 +84,11 @@ export const formatNomPatient = (NomPat :string, NomUsuel:string, Prenom:string)
 
     var nom_jf = NomPat;
     var nom_usuel = NomUsuel;
-    var prenom = Prenom;
 
     var nom_formated =
-        (nom_usuel != null ? nom_usuel.toUpperCase() : "-") +
+        (nom_usuel !== null ? nom_usuel.toUpperCase() : "-") +
         (
-            nom_jf != "" && nom_usuel != nom_jf && nom_jf != null ?
+            nom_jf !== "" && nom_usuel !== nom_jf && nom_jf !== null ?
                 "(" + nom_jf.toUpperCase() + ")"
                 :
                 ""
@@ -101,17 +100,17 @@ export const formatNomPatient = (NomPat :string, NomUsuel:string, Prenom:string)
 
 export const formatDateNaissance = (DateNaissance :Date) :string=> {
 
-    var dateNaiss = DateNaissance == null ? "-" : DateNaissance.toString();
+    var dateNaiss = DateNaissance === null ? "-" : DateNaissance.toString();
     return dateNaiss;
 
 };
 
 // Format code INSEE x xx xx xx xxx xxx - x
 export const formatINSEE = (numInsee:string|number, ClefINSEE:string|number)  :string => {
-    let insee = numInsee == null ? '-' : numInsee.toString();
+    let insee = numInsee === null ? '-' : numInsee.toString();
 
-    var clef = ClefINSEE != null ? " - " + ClefINSEE : '';
-    if (insee != '-') {
+    var clef = ClefINSEE !== null ? " - " + ClefINSEE : '';
+    if (insee !== '-') {
 
         insee = [insee.slice(0, 1), " ", insee.slice(1)].join('');
         insee = [insee.slice(0, 4), " ", insee.slice(4)].join('');

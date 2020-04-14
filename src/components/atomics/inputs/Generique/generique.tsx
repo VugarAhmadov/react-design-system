@@ -32,7 +32,7 @@ const InputGenerique = (props :inputProps) => {
         if (props.autoFocus)
             setTimeout(() => inputRef.current.focus({ preventScroll: true }), 100);
 
-    }, [])
+    }, [inputRef, props.autoFocus])
 
     // Au changement du parent 
     useEffect(() => {
