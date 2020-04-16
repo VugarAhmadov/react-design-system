@@ -3,7 +3,7 @@ import React from 'react';
 import Portal from '../../portal'
 
 interface ErrorPopUpProps{
-    height: number;
+    popUpHeight: number;
     container: string;
     message: string;
 }
@@ -13,15 +13,14 @@ const MessageErreur = (props :ErrorPopUpProps) => {
         <>
             <Portal
             container={"#" + props.container}
-            fullsize={true}
             portalStyles={{
-                transform: `translateY(${props.height + 2}px)`
+                transform: `translateY(${props.popUpHeight + 2}px)`
             }}
             >
             <div
                 className="InputError_PopUp"
                 style={{                     
-                    lineHeight: `${props.height}px`
+                    lineHeight: `${props.popUpHeight}px`
                 }}
             >
                     {props.message}
@@ -32,7 +31,7 @@ const MessageErreur = (props :ErrorPopUpProps) => {
 };
 
 MessageErreur.defaultProps = {
-    height: 30
+    popUpHeight: 30
 }
 
 export default MessageErreur;

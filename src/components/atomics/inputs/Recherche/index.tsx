@@ -1,35 +1,35 @@
 import React,{ useState, useEffect } from 'react';
-
 import Inputs from '../';
-import { inputProps, InputGeneriqueEvent } from '../Generique/generique.interface';
+import {
+    InputProps,
+    InputGeneriqueEvent
+} from '../Generique/generique.interface';
 import Icones from '../../icones'
 
-interface propsRecherche extends inputProps {
+export interface propsRechercheInterface extends InputProps {
     recherche           :string;
-    onRechercheChange   :(event :InputGeneriqueEvent) => string
-    onReset?            :() => void
+    onRechercheReset    :() => void
     lanceRecherche      :(value :string) => string;
+    onRechercheChange   :(event :InputGeneriqueEvent) => string
 }
 
-export default (props :propsRecherche) => {
+export default (props :propsRechercheInterface) => {
     
     const [active, setActive] = useState(false);
-    const [recherche, setRecherche] = useState("");
+    const [recherche, setRecherche] = useState(props.recherche);
 
     useEffect(() => {
-        setRecherche(props.recherche)        
+        console.log("PROPS.RECHERCHE", props.recherche)
+        setRecherche(props.recherche) 
+        props.recherche != undefined ? setActive(props.recherche.length > 0) : setActive(false);
     }, [props.recherche])
 
     const changeRecherche = (event :InputGeneriqueEvent) => {
-        setRecherche(event.value);
-        setActive(event.value.length > 0);
         props.onRechercheChange && props.onRechercheChange(event)
     }
     
     const reset = () => {
-        setRecherche("");
-        props.onReset && props.onReset()
-        setActive(false)
+        props.onRechercheReset && props.onRechercheReset()
     }
     
     const Icone = active ? <Icones.Croix onClick={reset} /> : <Icones.Loupe style={{color: '#727272',  opacity: 0.5}}/>

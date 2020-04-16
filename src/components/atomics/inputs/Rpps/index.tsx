@@ -34,14 +34,14 @@ import { formatNombreAvecZero } from '../../../../helpers/helpers';
  * 
  */
 
-export default (props) => {
+export default (props :any) => {
 
-    function formatRPPS(rpps) {
+    function formatRPPS(rpps :string) {
 
         return formatNombreAvecZero(rpps);
     }
 
-    function validRpps(_) {
+    function validRpps(val :string) {
         // On ne vérifie pas la longueur de la chaine, il n'y aura pas de PopUp d'erreur
         return true;
     }

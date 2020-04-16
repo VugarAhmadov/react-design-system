@@ -2,7 +2,7 @@ import React, {
     useState, useEffect, useRef
 } from 'react';
 
-import {inputProps} from './generique.interface'
+import {InputProps} from './generique.interface'
 
 import {
     isNullOrUndefined
@@ -16,10 +16,7 @@ import {
 
 import './style.less'
 
-
-
-
-const InputGenerique = (props :inputProps) => {
+const InputGenerique = (props :InputProps) => {
     // On initialise la valeur initiale avec la props content qui lui ai passé.
     const [value, setValue] = useState(props.content);
 
@@ -44,7 +41,10 @@ const InputGenerique = (props :inputProps) => {
         let valeur = event.target.value;
 
         // On appel la fonction Parente en cas ou on veut attacher un comportement
-        let valeurChangedFromParent = props.onChange({ value: valeur, isValid: props.validation(valeur) })
+        let valeurChangedFromParent = props.onChange ? props.onChange({
+            value: valeur,
+            isValid: props.validation ? props.validation(valeur) : true
+        }) : valeur
         if (!isNullOrUndefined(valeurChangedFromParent)) {
             valeur = valeurChangedFromParent;
         }
@@ -54,7 +54,11 @@ const InputGenerique = (props :inputProps) => {
     const handleKeyPress = (event :React.KeyboardEvent) => {
         if (event.key === 'Enter') {
             // On appel la fonction Parente en cas ou on veut attacher un comportement
-            props.onKeyPress({ value: value, isValid: props.validation(value), key: event.key });
+            props.onKeyPress && props.onKeyPress({
+                value: value,
+                isValid: props.validation ? props.validation(value) : true,
+                key: event.key
+            });
             inputRef.current.blur()
         }
     }
@@ -63,28 +67,28 @@ const InputGenerique = (props :inputProps) => {
         // Au Blur on affiche la condition erreur (PopUp + liserais rouge)
         let message = null
         if (value.length === 0 && props.required) { message = 'Ce champ est requis !' }
-        if (!props.validation(value) && value.length > 0) { message = props.errorMessage }
-        props.setError(message);
-        props.onBlur({ value: value, isValid: props.validation(value) })
+        if (props.validation && !props.validation(value) && value.length > 0) { message = props.errorMessage }
+        props.setError && props.setError(message);
+        props.onBlur && props.onBlur({ value: value, isValid: props.validation(value) })
     }
 
     const handleFocus = (event :React.FocusEvent<HTMLInputElement>) => {
         // Au Focus on affiche pas la condition erreur (PopUp + liserais rouge)
-        props.setError(null);
-        props.onFocus({ value: value, isValid: props.validation(value) })
+        props.setError && props.setError(null);
+        props.onFocus && props.onFocus({ value: value, isValid: props.validation(value) })
     }
 
     const inputStyles :React.CSSProperties = {
-        height: props.height + 'px',
-        width: props.width + 'px',
-        paddingLeft: props.icone_gauche ? props.height : props.height/4,
-        paddingRight: props.icone_droite ? props.height : props.height/4
+        height: props.inputHeight + 'px',
+        width: props.inputWidth + 'px',
+        paddingLeft: props.icone_gauche ? props.inputHeight : props.inputHeight/4,
+        paddingRight: props.icone_droite ? props.inputHeight : props.inputHeight/4
     }
 
     const iconeStyles :React.CSSProperties = {
         position: "absolute",
-        width: props.height,
-        height: props.height
+        width: props.inputHeight,
+        height: props.inputHeight
     }
     return (
         <>
@@ -121,24 +125,17 @@ const InputGenerique = (props :inputProps) => {
 }
 
 InputGenerique.defaultProps = {
-    content: "",
     type: "text",
     name: "input_generique",
-    placeHolder: "",
     errorMessage: "Une erreur empêche la validation de votre saisie",
     disabled: false,
     noLabel: false,
-    height: 30,
-    width: 210,
+    inputHeight: 30,
+    inputWidth: 210,
     labelWidth: 150,
     minlength: 0,
     maxlength: 99999,
     required: false,
-    onChange: () => { },
-    onKeyPress: () => { },
-    onBlur: () => { },
-    onFocus: () => { },
-    validation: () => { return true; },
     autoFocus: false,
     error: false
 }

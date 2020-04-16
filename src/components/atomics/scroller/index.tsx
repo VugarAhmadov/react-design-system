@@ -1,47 +1,46 @@
-import React from 'react'
+import React, {
+    useRef, RefObject
+} from 'react'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import './index.less';
 import styled from 'styled-components'
+import {
+    ScrollBarProps
+} from 'react-perfect-scrollbar';
 // import styles from 'react-perfect-scrollbar/dist/css/styles.css'
 // styles.use();
 
-export interface ScrollbarInterface {
-    option?         :any;
-    onYReachStart?  :(container: HTMLElement) => void
-    onYReachEnd?    :(container: HTMLElement) => void
-    onScrollDown?   :(container: HTMLElement) => void
-    onScrollY?      :(container: HTMLElement) => void
+export interface ScrollbarInterface extends ScrollBarProps {
+    scrollerOption?         :any;
     children?       :React.ReactElement;
-    className?      :string;
-    width?          :string;
-    height?         :string;
+    scrollerclassName?      :string;
+    scrollerWidth?          :string;
+    scrollerHeight?         :string;
 }
 
 const Wrapper = styled.div`
 position:relative;
-width : ${(props :React.CSSProperties) =>  props.width  ? props.width   : '100%'};
-height : ${(props:React.CSSProperties) =>  props.height ? props.height  : '100%'};
+width : ${(props :ScrollbarInterface) =>  props.scrollerWidth  ? props.scrollerWidth   : '100%'};
+height : ${(props:ScrollbarInterface) =>  props.scrollerHeight ? props.scrollerHeight  : '100%'};
 `
 const Scrollbar = (props :ScrollbarInterface) => {
+    let ScrollerRef = useRef() as React.RefObject<PerfectScrollbar>;
     return (
-        <Wrapper width={props.width} height={props.height} >
+        <Wrapper {...props}>
             <PerfectScrollbar
+                ref={ScrollerRef}
                 className={props.className}
                 option={props.option}
-                onYReachStart={(container :any) => {
-                    container.classList.remove("scrolled");
-                    props.onYReachStart && props.onYReachStart(container)
+                onYReachStart={() => {
+                    ScrollerRef.current?.context.classList.remove("scrolled");
+                    props.onYReachStart && props.onYReachStart()
                 }}
-                onYReachEnd={(container :any) => {
-                    props.onYReachEnd && props.onYReachEnd(container)
+                onYReachEnd={() => props.onYReachEnd}
+                onScrollDown={() => {
+                    ScrollerRef.current?.context.classList.add("scrolled")
+                    props.onScrollDown && props.onScrollDown()
                 }}
-                onScrollDown={(container :any) => {
-                    container.classList.add("scrolled")
-                    props.onScrollDown && props.onScrollDown(container)
-                }}
-                onScrollY={(container :any) => {
-                    props.onScrollY && props.onScrollY(container)
-                }}
+                onScrollY={() => props.onScrollY}
             >
                 {props.children}
             </PerfectScrollbar>

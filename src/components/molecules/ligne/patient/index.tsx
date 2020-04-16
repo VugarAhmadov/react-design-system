@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import Block from '../../../atomics/blocks'
 import styled from 'styled-components'
 import Icone from '../../../atomics/icones'
@@ -17,22 +17,25 @@ import NomPatient from '../../../../interfaces/nom_patient';
 import { handleClickInterface } from '../../../../interfaces/handle_click'
 
 export interface JumperLignePatientInterface {
-    id?                 :string|number;
-    civilite?           :string|undefined;
-    patient?            :NomPatient|undefined;
-    dateNaissance?      :string|undefined;
-    numTel1?            :string|undefined;
-    numTel2?            :string|undefined;
-    numSecu?            :NumeroSecuInterface|undefined;
-    //rendezVous          :string;
-    pratReferent?       :string|undefined;
+    Id?                 :string|number;
+    IdOds?              :string|number;
+    Civilite?           :string|undefined;
+    NomPat?             :string|undefined;
+    NomUsuel?           :string|undefined;
+    Prenom?             :string|undefined;
+    DateNaissance?      :string|undefined;
+    Portable?           :string|undefined;
+    Fixe?               :string|undefined;
+    NumINSEE?           :string|undefined;
+    ClefINSEE?          :string|undefined;
+    //ProchainRdv       :string;
+    PratReferent?       :string|undefined;
     selectable          :boolean;
     selected            :boolean;
     selectablePosition? :string;
-    onSelect            :(event :handleClickInterface) => handleClickInterface;
-    onLigneClick        :(event :handleClickInterface) => handleClickInterface;
+    selectableOnSelect? :(event :handleClickInterface) => handleClickInterface;
+    onLigneClick?       :(event :handleClickInterface) => handleClickInterface;
     ligneStyle?         :React.CSSProperties;
-    children?           :React.ReactElement;
 }
 
 const BlockNumero = styled.div`
@@ -63,12 +66,12 @@ const GetIcone =  (civilite:string|undefined) :JSX.Element|null =>  {
     }
 }
 
-export default (props :JumperLignePatientInterface) => {
+const LignePatient :FunctionComponent<JumperLignePatientInterface> = (props :JumperLignePatientInterface) => {
     
     const formatSousTitre = () :JSX.Element => {
-        if (props.dateNaissance && props.civilite){
+        if (props.DateNaissance && props.Civilite){
             let verbeNaitre = null
-            switch(props.civilite.toLowerCase()) {
+            switch(props.Civilite.toLowerCase()) {
                 case 'monsieur':
                     verbeNaitre = 'Né'
                     break;
@@ -76,15 +79,15 @@ export default (props :JumperLignePatientInterface) => {
                     verbeNaitre= 'Née'
                     break;
             }
-            return <>{verbeNaitre} le {moment(props.dateNaissance).format('DD/MM/YYYY')}, <span style={{fontFamily: 'Lato-Italic'}}>suivi par {props.pratReferent}</span></>
+            return <>{verbeNaitre} le {moment(props.DateNaissance).format('DD/MM/YYYY')}, <span style={{fontFamily: 'Lato-Italic'}}>suivi par {props.PratReferent}</span></>
         }
         return <Skeleton.Rectangle />
     }
 
     const formatAge = () => {
-        if (props.dateNaissance){     
-            var diff = moment().diff(props.dateNaissance, 'years');
-            var diffMois = moment().diff(props.dateNaissance, 'months');
+        if (props.DateNaissance){     
+            var diff = moment().diff(props.DateNaissance, 'years');
+            var diffMois = moment().diff(props.DateNaissance, 'months');
             if (diff > 0) return `${diff} ans` 
             return `${diffMois} mois`
         }
@@ -92,8 +95,8 @@ export default (props :JumperLignePatientInterface) => {
     }
     
     const formatNomPrenomPatient = () => {
-        return props.patient ? 
-            `${formatNomPatient(props.patient.nom, props.patient.nom_usuel, props.patient.prenom)} ${formatPrenom(props.patient.prenom)}`
+        return props.NomPat &&  props.NomUsuel && props.Prenom?  
+            `${formatNomPatient(props.NomPat, props.NomUsuel, props.Prenom)} ${formatPrenom(props.Prenom)}`
             : 
             null
     }
@@ -102,7 +105,7 @@ export default (props :JumperLignePatientInterface) => {
         <Ligne {...props}>
             <>
                 <Block.IconeSousTitre
-                icone={!ObjectIsNullOrUndefined(props.civilite) ? GetIcone(props.civilite) : null}
+                icone={!ObjectIsNullOrUndefined(props.Civilite) ? GetIcone(props.Civilite) : null}
                 soustitre={formatAge()}
                 skeletonIconeWidth={35}
                 />
@@ -116,13 +119,13 @@ export default (props :JumperLignePatientInterface) => {
                 />
                 <BlockNumero>
                     <div style={{height:'35px', alignItems:'center', display:'flex'}}>
-                        {props.numTel1 != null ? <Polices.Objet.Telephone numero={props.numTel1} /> : <Skeleton.Rectangle />}
+                        {props.Fixe != null ? <Polices.Objet.Telephone numero={props.Fixe} /> : <Skeleton.Rectangle />}
                     </div>
-                    {props.numTel2 != null ? <Polices.Objet.Telephone numero={props.numTel2} /> : <Skeleton.Rectangle />}
+                    {props.Portable != null ? <Polices.Objet.Telephone numero={props.Portable} /> : <Skeleton.Rectangle />}
                 </BlockNumero>
                 <BlockSecuriteSociale>
-                    {props.numSecu != null ? 
-                        <Polices.Objet.SecuriteSocial numero={props.numSecu.numero} cle={props.numSecu.cle} />
+                    {props.NumINSEE != null ? 
+                        <Polices.Objet.SecuriteSocial numero={props.NumINSEE} cle={props.ClefINSEE} />
                     :
                         <Skeleton.Rectangle width={120}/>
                     }
@@ -131,3 +134,10 @@ export default (props :JumperLignePatientInterface) => {
         </Ligne>
     )
 }
+
+LignePatient.defaultProps = {
+    NomUsuel: '',
+    NomPat  : '',
+    Prenom  : '',
+}
+export default LignePatient

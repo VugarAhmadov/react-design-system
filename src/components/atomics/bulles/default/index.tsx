@@ -2,38 +2,39 @@ import React, {
     useEffect,
     useRef,
     useState,
-    useCallback
+    useCallback,
+    FunctionComponent
 } from 'react';
 import styled from 'styled-components'
 import Portal from '../../portal'
+import { ObjectIsNullOrUndefined } from '../../../../helpers/helpers';
 
-import { isNullOrUndefined } from 'util';
 
-interface BulleProps{
-    height      :string;
-    width       :string;
-    container   :string;
-    show        :boolean;
-    children    :React.ReactElement;
+export interface BullePropsInterface {
+    bulleHeight      :string;
+    bulleContainer   :string;
+    bulleShow        :boolean;
 }
 
 const Wrapper = styled.div`
 position: relative;
-width:${(props :BulleProps) => props.width};
+width:100%;
 height: 0px;
 background-color: rgba(255,255,255,1);
 font-family: Lato-Bold;
 padding:0;
 border-radius: 4px;
 font-size: 12px;
-transition: height 250ms;
+transition: all 250ms ease-in-out;
+opacity: 0;
 &.show {
     padding:4px 10px;
-    height:${(props :BulleProps) =>  props.height };
-    border: ${(props :BulleProps) => props.show ? ' 1px solid #DDDDDD': '0px'};
+    height:${(props :BullePropsInterface) =>  props.bulleHeight };
+    border: ${(props :BullePropsInterface) => props.bulleShow ? ' 1px solid #DDDDDD': '0px'};
     box-shadow: 0 2px 8px 0 rgba(0,0,0,.25);
+    opacity: 1;
 }
-${(props :BulleProps) => props.show ? `
+${(props :BullePropsInterface) => props.bulleShow ? `
 &:after {
     content: '';
     position: absolute;
@@ -47,46 +48,36 @@ ${(props :BulleProps) => props.show ? `
 
 `
 
-const Bulle = (props :BulleProps) => {
+const Bulle :FunctionComponent<BullePropsInterface> = (props) => {
     //On stock la référence du parent
-    const containerRef = useRef() as React.MutableRefObject<HTMLElement|null>;
-    const bulleRef = useRef() as React.MutableRefObject<HTMLElement|null>;
+    const containerRef = useRef() as React.MutableRefObject<HTMLDivElement|null>;
+    const bulleRef = useRef() as React.MutableRefObject<HTMLDivElement|null>;
     
     //Permettra de mettra  à jour le dom lorsque la ref va changer
     const [, updateState] = useState();
-    useEffect(() => {
-        if (props.show) {
-            setTimeout(() => bulleRef.current?.classList.add('show'), 0);
-        } else {
-            setTimeout(() => bulleRef.current?.classList.remove('show'), 0);
-        }
-    }, [props.show])
+   
     useEffect(() => {
         //On stock le noeud HTML
-        containerRef.current = document.querySelector("#"+props.container);
-        //On lance la maj du dom
-        updateState(containerRef.current)
-    }, [containerRef.current]);
+        containerRef.current = document.querySelector("#"+props.bulleContainer);
+    }, []);
 
-    const GetParentHeight = useCallback(
-        () :string => {
-            if (!isNullOrUndefined(containerRef.current)) {
-                //Permet de positionner la bulle en dessous de l'element parent
-                return `${containerRef.current.offsetHeight+ 2}px`;
-            }
-            //Place l'élement au dessus du parent
-            return '0px';
-        },
-        [containerRef.current]
-    )
+    const GetParentHeight = () => {
+        console.log("containerRef?.current", containerRef?.current)
+        if (containerRef?.current !== undefined && containerRef?.current!== null ) {
+
+            //Permet de positionner la bulle en dessous de l'element parent
+            return `${containerRef.current.offsetHeight+ 2}px`;
+        }
+        //Place l'élement au dessus du parent
+        return '0px';
+    }
 
     return (
         <Portal
-            container={"#" + props.container}            
-            fullsize={true}
+            container={"#" + props.bulleContainer}
             portalStyles={{transform: `translateY(${GetParentHeight()})`, overflow: 'hidden', padding: '4px'}}
         >
-            <Wrapper ref={bulleRef} {...props}>
+            <Wrapper className={props.bulleShow ? 'show' : ''} ref={bulleRef} {...props}>
                 {props.children}
             </Wrapper>
         </Portal>
@@ -94,8 +85,8 @@ const Bulle = (props :BulleProps) => {
 };
 
 Bulle.defaultProps = {
-    height: 30,
-    show: false
+    bulleHeight: '30',
+    bulleShow: false
 }
 
 export default Bulle;

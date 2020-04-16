@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
 import Checkbox from '../inputs/Generique/checkbox'
-import { JumperLignePatientInterface } from '../../molecules/lignes/Jumper/Patient/interface'
+import { JumperLignePatientInterface } from '../../molecules/ligne/patient'
 import { handleClickInterface } from '../../../interfaces/handle_click'
 
 const ItemSelectable = styled.div`
@@ -11,19 +11,19 @@ flex-flow: row nowrap;
 
 export interface SelectableInterface {    
     selectable          :boolean;
+    selected            :boolean;
     selectablePosition? :string;
-    onSelect            :(event: handleClickInterface) => handleClickInterface;
-    children?           :React.ReactElement 
+    selectableOnSelect? :(event: handleClickInterface) => handleClickInterface;
 }
 
-const Selectable = (props :JumperLignePatientInterface) :React.ReactElement => {
+const Selectable :FunctionComponent<JumperLignePatientInterface> = (props) :React.ReactElement => { 
     if (props.selectable) {
         const handleClick = (event :React.MouseEvent<HTMLDivElement, MouseEvent>) => {
             event.stopPropagation();
-            props.onSelect({event, ...props});
+            props.selectableOnSelect && props.selectableOnSelect({event, props: {...props}});
         }
         return (
-            <ItemSelectable {...props}>
+            <ItemSelectable>
                 {props.selectablePosition === 'left'   && <Checkbox onClick={handleClick} {...props} />}
                     {props.children}
                 {props.selectablePosition === 'right'  && <Checkbox onClick={handleClick} {...props} />}

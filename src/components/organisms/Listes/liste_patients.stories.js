@@ -3,31 +3,18 @@ import React, {
     useEffect
   } from 'react';
 import { withActions } from '@storybook/addon-actions';
-import ListePatient from './ListePatients'
-import moment from 'moment'
-import Scroller from '../../atomics/scroller'
-import './ListePatients/index.less'
+import ListePatient from './Patients'
+import './Patients/index.less'
+import { 
+    PatientDesmosJumper
+  } from '../../../mocks/patient.desmos'
 
-const initialState = {
-    patient:{
-        nom: 'issner',
-        nom_usuel:'issner',
-        prenom: 'natasha'
-    },
-    dateNaissance: moment('1980-05-31').toISOString(),
-    numSecu: {
-        numero:'18512457658',
-        cle: '12'
-    },
-    civilite: 'mademoiselle',
-    numTel1: '0383568974',
-    numTel2: '',
-    selected: false,
-    pratReferent: 'DR FOLLE Amour'
-}
-const listePatient= [{id: 1, ...initialState}, {id: 2, ...initialState}, {id: 3, ...initialState}, {id: 4, ...initialState}]
-
-
+const listePatient = [
+    { Id: 1, ...PatientDesmosJumper},
+    { Id: 2, ...PatientDesmosJumper},
+    { Id: 3, ...PatientDesmosJumper},
+    { Id: 4, ...PatientDesmosJumper}
+]
 
 export const LignePatientCpt = () => {
     const [patients, setPatients] = useState(listePatient)
@@ -36,13 +23,13 @@ export const LignePatientCpt = () => {
         setTimeout(() => {
             if (patients && patients.length > 0 ) {
             return setPatients(null)
-            } 
+            }
             return setPatients(listePatient)
         }, 5000)
     }, [patients])
 
     const handleOnSelect = (evenement) => {
-        let pat = patients.find(p => p.id === evenement.id);
+        let pat = patients.find(p => p.Id === evenement.Id);
         if (pat) {
             pat.selected = !pat.selected
         }

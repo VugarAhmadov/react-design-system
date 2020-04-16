@@ -5,17 +5,22 @@ import './style.less'
 
 
 interface ChildProps {
-    cb          :(event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+    cb?         :(event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
     style?      : React.CSSProperties;
     children?   :ReactElement;
 }
 
 interface PortalProps {
-    cb: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
+    cb?         : (event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
     container   :string;
-    fullscreen? :boolean;
+    fullscreen? :boolean|undefined;
     portalStyles:React.CSSProperties;
-    children?   :ReactElement;
+    children    :ReactElement;
+}
+
+interface KeyValue {
+    key: string;
+    value: string;
 }
 
 const Child = (props :ChildProps)  => (
@@ -33,9 +38,10 @@ const Portal = (props: PortalProps) => {
     const toggleActif = useCallback(
         () => {
             let styles = props.portalStyles || {}
-            for (let [key, value] of Object.entries(styles)) {
-                DOMWrapperElement.style[key] = value;
-            }
+            // Revoir le pb de typage
+            Object.entries(styles as React.CSSProperties).map((value, index) => {
+                DOMWrapperElement.style.setProperty(value[0], value[1]);
+            })
             DOMContainer.current = document.querySelector(props.container)
             if (DOMContainer) {
                 (props.fullscreen) ? DOMWrapperElement.classList.add('fullsize') : DOMWrapperElement.classList.remove('fullsize')
@@ -64,6 +70,10 @@ const Portal = (props: PortalProps) => {
     }, [props.fullscreen, toggleActif])
 
     return createPortal(<Child  {...props}/>, DOMWrapperElement)
+}
+
+Portal.defaultProps = {
+    fullscreen: false
 }
 
 export default Portal;

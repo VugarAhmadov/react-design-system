@@ -6,30 +6,15 @@ import { withActions } from '@storybook/addon-actions';
 import Lignes from '.'
 import moment from 'moment';
 
-const initialState = {
-  id: 1,
-  patient:{
-    nom: 'issner',
-    nom_usuel:'issner',
-    prenom: 'natasha'
-  },
-  dateNaissance: moment('1980-05-31'),
-  numSecu: {
-    numero:'18512457658',
-    cle: '12'
-  },
-  civilite: 'mademoiselle',
-  numTel1: '0383568974',
-  numTel2: '',
-  pratReferent: 'DR FOLLE Amour',
-  selected: false
-}
+import { 
+  PatientDesmosJumper
+} from '../../../mocks/patient.desmos'
 
 export const LignePatientCpt = () => {
   const [infoPatient, setinfoPatient] = useState(null);
   useEffect(() => {
     setTimeout(() => {      
-      return setinfoPatient(initialState)
+      return setinfoPatient(PatientDesmosJumper)
     }, 5000)
   }, [])
 
@@ -37,16 +22,21 @@ export const LignePatientCpt = () => {
     infoPatient.selected = !infoPatient.selected 
     setinfoPatient({selected: !infoPatient.selected , ...infoPatient})
   }
-
   return (
-    <Lignes.Jumper.Patient
-    patient={infoPatient ? infoPatient.patient : null}
-    dateNaissance={infoPatient ? infoPatient.dateNaissance: null}
-    civilite={infoPatient ? infoPatient.civilite: null}
-    numSecu={infoPatient ? infoPatient.numSecu: null}
-    numTel1={infoPatient ? infoPatient.numTel1: null}
-    numTel2={infoPatient ? infoPatient.numTel2: null}
-    pratReferent={infoPatient ? infoPatient.pratReferent: null}
+    <Lignes.Patient
+    Id={infoPatient ? infoPatient.Id: null}
+    IdOds={infoPatient ? infoPatient.IdOds: null}
+    NomPat={infoPatient ? infoPatient.NomPat: null}
+    NomUsuel={infoPatient ? infoPatient.NomPat: null}
+    Prenom={infoPatient ? infoPatient.NomPat: null}
+    DateNaissance={infoPatient ? infoPatient.DateNaissance: null}
+    Civilite={infoPatient ? infoPatient.Civilite?.toLocaleLowerCase(): null}
+    NumINSEE={infoPatient ? infoPatient.NumINSEE: null}
+    ClefINSEE={infoPatient ? infoPatient.ClefINSEE: null}
+    Fixe={infoPatient ? infoPatient.Fixe: null}
+    Portable={infoPatient ? infoPatient.Portable: null}
+    PratReferent={infoPatient ? infoPatient.PratReferent: null}
+    selected={infoPatient ? infoPatient.selected: null}
     onLigneClick={() => console.log("PATIENT CLICK")}
     selected={infoPatient ? infoPatient.selected: null}
     onSelect={()=> setSelected()}

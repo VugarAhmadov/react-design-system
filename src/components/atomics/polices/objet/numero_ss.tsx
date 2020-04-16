@@ -7,8 +7,8 @@ import { formatINSEE } from '../../../../helpers/helpers'
 import { isNullOrUndefined } from 'util'
 
 interface propsSecuriteSociale {
-    numero          :string|null;
-    cle             :string|null;
+    numero          :string|undefined;
+    cle             :string|undefined;
     onClick?        :(event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
     onMouseEnter?   :(event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
     onMouseLeave?   :(event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
@@ -17,6 +17,7 @@ interface propsSecuriteSociale {
 }
 
 export default (props :propsSecuriteSociale) => {
+
     return (
         <SecuriteSocialStyle
         className={props.className}
@@ -25,7 +26,7 @@ export default (props :propsSecuriteSociale) => {
         onClick={props.onClick}
         style={props.styles}
         >
-            {isNullOrUndefined(props.numero)  ? formatINSEE(props.numero, props.cle) : '-'}
+            {( !isNullOrUndefined(props.numero) && !isNullOrUndefined(props.cle) )  ? formatINSEE(props.numero, props.cle) : '-'}
         </SecuriteSocialStyle>
     )
 }

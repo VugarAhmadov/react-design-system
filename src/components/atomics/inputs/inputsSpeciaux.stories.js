@@ -1,4 +1,6 @@
-import React from 'react';
+import React,{
+  useState
+} from 'react';
 import { withActions } from '@storybook/addon-actions';
 import Inputs from './index';
 import Textes from '../polices';
@@ -32,15 +34,22 @@ InputsFiness.story = {
   name: 'Input de type Finess',
 };
 
-export const InputsRecherche = () => (
-  <>
-    <Inputs.Recherche
-    placeHolder="Ma recherche"
-    lanceRecherche={(value) => console.log(value)}
-    noLabel
-    />
-  </>
-);
+export const InputsRecherche = () => {
+  const [recherche, setrecherche] = useState('')
+  
+  return (
+    <>
+      <Inputs.Recherche
+      placeHolder="Ma recherche"
+      recherche={recherche}
+      onRechercheChange={(ev) => setrecherche(ev.value)}
+      onRechercheReset={() => setrecherche('')}
+      lanceRecherche={(value) => console.log(value)}
+      noLabel
+      />
+    </>
+  );
+}
 
 InputsRecherche.story = {
   name: 'Input de type Recherche',
