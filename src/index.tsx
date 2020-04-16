@@ -1,8 +1,4 @@
-import RecherchePatient from "./components/organisms/Jumpers/RecherchePatient"
-import Button from "./components/atomics/buttons"
 
 
-export default {
-    Button,
-    RecherchePatient
-};
+export {default as RecherchePatient} from './components/organisms/Jumpers/RecherchePatient'
+export { default as Button } from './components/atomics/buttons'

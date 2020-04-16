@@ -1,6 +1,6 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: 'production',
   entry: './src/index.tsx',
@@ -8,6 +8,11 @@ module.exports = {
   optimization:{
     minimize: false
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    })
+  ],
   module: {
     rules: [
       {
@@ -21,7 +26,35 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: 'svg-inline-loader'
-        }
+      },
+      {
+        test: /\.(less)$/,
+        use: [
+            MiniCssExtractPlugin.loader,
+            {
+                loader: "css-loader"
+            },
+            {
+                loader: "less-loader",
+                options: {
+                    plugins: []
+                }
+            }
+
+        ]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
+          }
+        ]
+      }
     ],
   },
   externals: {
@@ -41,7 +74,7 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: [ '.tsx', '.ts', '.js', '.less' ],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
