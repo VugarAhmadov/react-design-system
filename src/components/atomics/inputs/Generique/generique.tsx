@@ -2,19 +2,51 @@ import React, {
     useState, useEffect, useRef
 } from 'react';
 
-import {InputProps} from './generique.interface'
 
 import {
     isNullOrUndefined
 } from '../../../../helpers/helpers'
 
 // Hook qui affichera le label + la gestion d'erreur pour tout les composant générique d'input
-import {
-    avecLabelEstErreur
-} from './HOC_wrapper'
-
+import  avecLabelEstErreur from './HOC_wrapper'
 
 import './style.less'
+
+export interface InputGeneriqueEvent {
+    value :string;
+    isValid :boolean;
+    key? :string;
+    inputElement? :HTMLInputElement;
+}
+
+export interface InputProps {
+    Input_content       :string;
+    Input_type          :string;
+    Input_name          :string;
+    Input_placeHolder   :string;
+    Input_errorMessage  :string;
+    Input_disabled      :boolean;
+    Input_Height        :number;
+    Input_Width         :number;
+    Input_customClass   :string;
+    Input_label         :string;
+    Input_labelWidth    :number;
+    Input_minlength     :number;
+    Input_maxlength     :number;
+    Input_required      :boolean;
+    Input_noLabel       :boolean;
+    Input_onChange      :(event: InputGeneriqueEvent) => string;
+    Input_onKeyPress    :(event: InputGeneriqueEvent) => void;
+    Input_onBlur        :(event: InputGeneriqueEvent) => void;
+    Input_onFocus       :(event: InputGeneriqueEvent) => void;
+    Input_validation    :(value :string) => boolean;
+    Input_autoFocus     :boolean;
+    Input_setError      :(value :string|null) => void; // Sera envoyé par le composant HOC
+    Input_error         :boolean; // Sera envoyé par le composant HOC,
+    Input_icone_gauche  :React.ReactElement;
+    Input_icone_droite  :React.ReactElement;
+}
+
 
 const InputGenerique = (props :InputProps) => {
     // On initialise la valeur initiale avec la props content qui lui ai passé.
@@ -149,5 +181,6 @@ InputGenerique.defaultProps = {
     Input_autoFocus: false,
     Input_error: false
 }
+
 // On attache le comportement avecLabelEstErreur au composant
 export default avecLabelEstErreur(InputGenerique);

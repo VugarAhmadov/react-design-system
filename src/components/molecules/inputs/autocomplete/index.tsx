@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Bulles from '../../../atomics/bulles'
 import Inputs from '../../../atomics/inputs'
 import {uuid} from 'uuidv4'
-import { InputGeneriqueEvent } from '../../../atomics/inputs/Generique/generique.interface'
+import { InputGeneriqueEvent } from '../../../atomics/inputs/Generique/generique'
 import { propsRechercheInterface } from '../../../atomics/inputs/Recherche'
 import { BullePropsInterface } from '../../../atomics/bulles/default'
 

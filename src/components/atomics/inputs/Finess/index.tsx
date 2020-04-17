@@ -3,7 +3,7 @@ import Inputs from '../';
 import {
     formatNombreAvecZero
 } from "../../../../helpers/helpers";
-import { InputGeneriqueEvent } from '../Generique/generique.interface';
+import { InputGeneriqueEvent } from '../Generique/generique';
 
 const InputsFiness :FunctionComponent<any> = (props) => {
 

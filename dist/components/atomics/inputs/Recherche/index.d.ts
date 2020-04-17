@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { InputProps, InputGeneriqueEvent } from '../Generique/generique.interface';
+import { InputProps, InputGeneriqueEvent } from '../Generique/generique';
 export interface propsRechercheInterface extends InputProps {
     InputRecherche_recherche: string;
     InputRecherche_onReset: () => void;

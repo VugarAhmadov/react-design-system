@@ -3,7 +3,7 @@ import Inputs from '../';
 import {
     InputProps,
     InputGeneriqueEvent
-} from '../Generique/generique.interface';
+} from '../Generique/generique';
 import Icones from '../../icones'
 
 export interface propsRechercheInterface extends InputProps {

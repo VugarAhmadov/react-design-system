@@ -22876,30 +22876,29 @@ var uuidv4 = __webpack_require__(3);
 
 
 
-function avecLabelEstErreur(WrappedInput) {
-    return (props) => {
-        const { Input_name = "input_generique", Input_Height = 30, Input_labelWidth = 150 } = props;
-        // On génère une id unique afin de pouvoir afficher la popup en cas d'erreur
-        const id = Input_name + '-' + Object(uuidv4["uuid"])();
-        const [stateError, setStateError] = Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useState"])('');
-        const handleSetError = (val) => {
-            val && setStateError(val);
-        };
-        const labelStyles = {
-            width: `${Input_labelWidth}px`,
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            whiteSpace: "nowrap"
-        };
-        return (external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: `input input_${Input_name} ` + (props.Input_customClass), style: { height: `${Input_Height}px` } },
-            !props.Input_noLabel &&
-                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: `input--label input_${Input_name}--label`, style: labelStyles }, props.Input_label),
-            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: `input--input input_${Input_name}--input`, id: id },
-                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(WrappedInput, Object.assign({ Input_setError: handleSetError, Input_error: stateError.length > 0 }, props)),
-                stateError &&
-                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(popup_erreur, { popUpHeight: props.Input_Height, container: id, message: stateError }))));
+const avecLabelEstErreur = (WrappedInput) => (props) => {
+    const { Input_name = "input_generique", Input_Height = 30, Input_labelWidth = 150 } = props;
+    // On génère une id unique afin de pouvoir afficher la popup en cas d'erreur
+    const id = Input_name + '-' + Object(uuidv4["uuid"])();
+    const [stateError, setStateError] = Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useState"])('');
+    const handleSetError = (val) => {
+        val && setStateError(val);
     };
-}
+    const labelStyles = {
+        width: `${Input_labelWidth}px`,
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        whiteSpace: "nowrap"
+    };
+    return (external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: `input input_${Input_name} ` + (props.Input_customClass), style: { height: `${Input_Height}px` } },
+        !props.Input_noLabel &&
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: `input--label input_${Input_name}--label`, style: labelStyles }, props.Input_label),
+        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: `input--input input_${Input_name}--input`, id: id },
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(WrappedInput, Object.assign({ Input_setError: handleSetError, Input_error: stateError.length > 0 }, props)),
+            stateError &&
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(popup_erreur, { popUpHeight: props.Input_Height, container: id, message: stateError }))));
+};
+/* harmony default export */ var HOC_wrapper = (avecLabelEstErreur);
 
 // EXTERNAL MODULE: ./src/components/atomics/inputs/Generique/style.less
 var Generique_style = __webpack_require__(9);
@@ -23007,7 +23006,7 @@ InputGenerique.defaultProps = {
     Input_error: false
 };
 // On attache le comportement avecLabelEstErreur au composant
-/* harmony default export */ var generique = (avecLabelEstErreur(InputGenerique));
+/* harmony default export */ var generique = (HOC_wrapper(InputGenerique));
 
 // CONCATENATED MODULE: ./src/components/atomics/inputs/Rpps/index.tsx
 
