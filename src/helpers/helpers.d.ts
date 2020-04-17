@@ -1,0 +1,21 @@
+/// <reference types="react" />
+import { Moment } from 'moment';
+export declare function isNumeric(x: string | number): boolean;
+export declare function isNullOrUndefined(x: string): boolean;
+export declare function ObjectIsNullOrUndefined(x: any): boolean;
+export declare function formatDateDMMMYYYY(dateMoment: Moment): string;
+export declare function afficherMontant(entree: string, nbdecimales?: number): string;
+export declare const formatNumTel: (numero: string) => string;
+export declare const formatNomPatient: (NomPat: string, NomUsuel: string, Prenom: string) => string;
+export declare const formatDateNaissance: (DateNaissance: Date) => string;
+export declare const formatINSEE: (numInsee: import("react").ReactText, ClefINSEE: import("react").ReactText) => string;
+export declare function formatDate(entree: string): string;
+export declare function formatNombre(entree: string): string;
+export declare function formatNombreAvecZero(entree: string): string;
+export declare function formatMontant(entree: string, nbdecimales?: number): string;
+export declare function valideMontant(nombre: number, montantMax?: number, montantMin?: number): boolean;
+export declare function formatLettreCle(entree: string): string;
+export declare function formatCodeActe(entree: string): string;
+export declare function formatAlphaNumerique(entree: string): string;
+export declare function formatNombreDent(entree: string): string | number;
+export declare function formatPrenom(entree: string): string;
