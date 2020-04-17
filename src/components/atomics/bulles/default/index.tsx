@@ -7,13 +7,12 @@ import React, {
 } from 'react';
 import styled from 'styled-components'
 import Portal from '../../portal'
-import { ObjectIsNullOrUndefined } from '../../../../helpers/helpers';
 
 
 export interface BullePropsInterface {
-    bulleHeight      :string;
-    bulleContainer   :string;
-    bulleShow        :boolean;
+    Bulle_Height      :string;
+    Bulle_Container   :string;
+    Bulle_Show        :boolean;
 }
 
 const Wrapper = styled.div`
@@ -29,12 +28,12 @@ transition: all 250ms ease-in-out;
 opacity: 0;
 &.show {
     padding:4px 10px;
-    height:${(props :BullePropsInterface) =>  props.bulleHeight };
-    border: ${(props :BullePropsInterface) => props.bulleShow ? ' 1px solid #DDDDDD': '0px'};
+    height:${(props :BullePropsInterface) =>  props.Bulle_Height };
+    border: ${(props :BullePropsInterface) => props.Bulle_Show ? ' 1px solid #DDDDDD': '0px'};
     box-shadow: 0 2px 8px 0 rgba(0,0,0,.25);
     opacity: 1;
 }
-${(props :BullePropsInterface) => props.bulleShow ? `
+${(props :BullePropsInterface) => props.Bulle_Show ? `
 &:after {
     content: '';
     position: absolute;
@@ -58,7 +57,7 @@ const Bulle :FunctionComponent<BullePropsInterface> = (props) => {
    
     useEffect(() => {
         //On stock le noeud HTML
-        containerRef.current = document.querySelector("#"+props.bulleContainer);
+        containerRef.current = document.querySelector("#"+props.Bulle_Container);
     }, []);
 
     const GetParentHeight = () => {
@@ -74,10 +73,10 @@ const Bulle :FunctionComponent<BullePropsInterface> = (props) => {
 
     return (
         <Portal
-            container={"#" + props.bulleContainer}
+            container={"#" + props.Bulle_Container}
             portalStyles={{transform: `translateY(${GetParentHeight()})`, overflow: 'hidden', padding: '4px'}}
         >
-            <Wrapper className={props.bulleShow ? 'show' : ''} ref={bulleRef} {...props}>
+            <Wrapper className={props.Bulle_Show ? 'show' : ''} ref={bulleRef} {...props}>
                 {props.children}
             </Wrapper>
         </Portal>
@@ -85,8 +84,8 @@ const Bulle :FunctionComponent<BullePropsInterface> = (props) => {
 };
 
 Bulle.defaultProps = {
-    bulleHeight: '30',
-    bulleShow: false
+    Bulle_Height: '30',
+    Bulle_Show: false
 }
 
 export default Bulle;

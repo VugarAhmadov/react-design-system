@@ -2,32 +2,33 @@ export interface InputGeneriqueEvent {
     value :string;
     isValid :boolean;
     key? :string;
+    inputElement? :HTMLInputElement;
 }
 
 export interface InputProps {
-    content         :string;
-    type            :string;
-    name            :string;
-    placeHolder     :string;
-    errorMessage    :string;
-    disabled        :boolean;
-    inputHeight     :number;
-    inputWidth      :number;
-    label           :string;
-    customClass     :string;
-    labelWidth      :number;
-    minlength       :number;
-    maxlength       :number;
-    required        :boolean;
-    noLabel         :boolean;
-    onChange        :(event: InputGeneriqueEvent) => string;
-    onKeyPress      :(event: InputGeneriqueEvent) => void;
-    onBlur          :(event: InputGeneriqueEvent) => void;
-    onFocus         :(event: InputGeneriqueEvent) => void;
-    validation      :(value :string) => boolean;
-    autoFocus       :boolean;
-    setError        :(value :string|null) => void; // Sera envoyé par le composant HOC
-    error           :boolean; // Sera envoyé par le composant HOC,
-    icone_gauche    :React.ReactElement;
-    icone_droite    :React.ReactElement;
+    Input_content       :string;
+    Input_type          :string;
+    Input_name          :string;
+    Input_placeHolder   :string;
+    Input_errorMessage  :string;
+    Input_disabled      :boolean;
+    Input_Height        :number;
+    Input_Width         :number;
+    Input_customClass   :string;
+    Input_label         :string;
+    Input_labelWidth    :number;
+    Input_minlength     :number;
+    Input_maxlength     :number;
+    Input_required      :boolean;
+    Input_noLabel       :boolean;
+    Input_onChange      :(event: InputGeneriqueEvent) => string;
+    Input_onKeyPress    :(event: InputGeneriqueEvent) => void;
+    Input_onBlur        :(event: InputGeneriqueEvent) => void;
+    Input_onFocus       :(event: InputGeneriqueEvent) => void;
+    Input_validation    :(value :string) => boolean;
+    Input_autoFocus     :boolean;
+    Input_setError      :(value :string|null) => void; // Sera envoyé par le composant HOC
+    Input_error         :boolean; // Sera envoyé par le composant HOC,
+    Input_icone_gauche  :React.ReactElement;
+    Input_icone_droite  :React.ReactElement;
 }

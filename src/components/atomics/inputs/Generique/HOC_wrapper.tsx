@@ -5,17 +5,11 @@ import React, {
 import PopUpError from './popup_erreur'
 import { InputProps } from '../Generique/generique.interface'
 import { uuid } from 'uuidv4';
-import {
-    ObjectIsNullOrUndefined
-} from '../../../../helpers/helpers'
 
-interface HOCprops extends InputProps {   
-    name        :string;
-    label       :string;
-    errorMessage:string;
-    noLabel     :boolean;
-    inputHeight :number;
-    labelWidth  :number;
+interface HOCprops extends InputProps {
+    Input_label         :string;
+    Input_noLabel       :boolean;
+    Input_labelWidth    :number;
 }
 
 export function avecLabelEstErreur(WrappedInput :FunctionComponent<InputProps>) {
@@ -23,9 +17,9 @@ export function avecLabelEstErreur(WrappedInput :FunctionComponent<InputProps>) 
     return (props :HOCprops) =>  {
         
         const {
-            name = "input_generique",
-            inputHeight = 30,
-            labelWidth=150         
+            Input_name = "input_generique",
+            Input_Height = 30,
+            Input_labelWidth=150         
         } = props
 
         // On génère une id unique afin de pouvoir afficher la popup en cas d'erreur
@@ -37,27 +31,27 @@ export function avecLabelEstErreur(WrappedInput :FunctionComponent<InputProps>) 
         }
 
         const labelStyles :React.CSSProperties = {
-            width: `${labelWidth}px`,
+            width: `${Input_labelWidth}px`,
             textOverflow: "ellipsis",
             overflow: "hidden",
             whiteSpace:"nowrap"
         }
 
         return (
-            <div className={`input input_${name} ` + (props.customClass)} style={{height: `${inputHeight}px` }}>
-                {!props.noLabel &&
-                    <div className={`input--label input_${name}--label`} style={labelStyles}>
-                        {props.label}
+            <div className={`input input_${Input_name} ` + (props.Input_customClass)} style={{height: `${Input_Height}px` }}>
+                {!props.Input_noLabel &&
+                    <div className={`input--label input_${Input_name}--label`} style={labelStyles}>
+                        {props.Input_label}
                     </div>                
                 }
                 <div
-                    className={`input--input input_${name}--input`}
+                    className={`input--input input_${Input_name}--input`}
                     id={id}
                 >
-                    <WrappedInput setError={handleSetError} error={stateError.length > 0} {...props} />
+                    <WrappedInput Input_setError={handleSetError} Input_error={stateError.length > 0} {...props} />
                     {stateError &&
                         <PopUpError
-                            popUpHeight={props.inputHeight}
+                            popUpHeight={props.Input_Height}
                             container={id}
                             message={stateError}
                         />

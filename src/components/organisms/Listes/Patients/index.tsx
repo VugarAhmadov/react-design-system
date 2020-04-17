@@ -6,38 +6,35 @@ import {
     JumperLignePatientInterface
 } from '../../../molecules/ligne/patient'
 import { uuid } from 'uuidv4'
-import { handleClickInterface } from '../../../../interfaces/handle_click'
 import Scroller from '../../../atomics/scroller'
 import { LigneInterface } from '../../../atomics/ligne'
+import { SelectableInterface } from '../../../atomics/comportements/selectable'
 
 const Wrapper = styled.div`
 overflow: hidden;
-height: ${(props :ListePatientsInterface) => props.listePatientHeight ? props.listePatientHeight : '100%'};
-width: ${(props :ListePatientsInterface) => props.listePatientWidth ? props.listePatientWidth : '100%'};
+height: ${(props :ListePatientsInterface) => props.ListePatient_Height ? props.ListePatient_Height : '100%'};
+width: ${(props :ListePatientsInterface) => props.ListePatient_Width ? props.ListePatient_Width : '100%'};
 `
 
-export interface ListePatientsInterface extends LigneInterface {
-    wrapperStyle?       :React.CSSProperties;
-    patients            :Array<JumperLignePatientInterface>;
-    preloadCount        :number;
-    selectable          :boolean;
-    selectablePosition? :string;
-    ligneStyle?         :React.CSSProperties;
-    listePatientHeight  :number;
-    listePatientWidth   :number;
+export interface ListePatientsInterface extends LigneInterface, SelectableInterface {
+    ListePatient_wrapperStyle?  :React.CSSProperties;
+    ListePatient_patients       :Array<JumperLignePatientInterface>;
+    ListePatient_preloadCount   :number;
+    ListePatient_Height         :number;
+    ListePatient_Width          :number;
 }
 
 const listePatientCpt = (props :ListePatientsInterface) => {
     return (
         <Wrapper
-        style={{...props.wrapperStyle}}
+        style={{...props.ListePatient_wrapperStyle}}
         {...props}
         >
-            <Scroller scrollerHeight={props.listePatientHeight +'px'}>
-                {props.patients
+            <Scroller scrollerHeight={props.ListePatient_Height +'px'}>
+                {props.ListePatient_patients
                 ?
                 <>
-                {props.patients?.map((patient :JumperLignePatientInterface) => 
+                {props.ListePatient_patients?.map((patient :JumperLignePatientInterface) => 
                     <Ligne.Patient
                     key={uuid()}
                     Id={patient.Id}
@@ -52,17 +49,14 @@ const listePatientCpt = (props :ListePatientsInterface) => {
                     Fixe={patient.Fixe}
                     Portable={patient.Portable}
                     PratReferent={patient.PratReferent}
-                    selected={patient.selected}
-                    onLigneClick={props.onLigneClick}
-                    selectableOnSelect={props.selectableOnSelect}
-                    selectablePosition={props.selectablePosition}
-                    selectable={props.selectable}
+                    CheckBox_selected={patient.Selected}
+                    {...props}
                     />
                 )}
                 </>
                 :
                 <>
-                {Array(props.preloadCount).fill(null).map( (x,i) => i ).map( _ => 
+                {Array(props.ListePatient_preloadCount).fill(null).map( (x,i) => i ).map( _ => 
                     <Ligne.Patient
                         key={uuid()}
                         Id={undefined}
@@ -77,8 +71,9 @@ const listePatientCpt = (props :ListePatientsInterface) => {
                         Fixe={undefined}
                         Portable={undefined}
                         PratReferent={undefined}
-                        selectable={false}
-                        selected={false}
+                        Selectable_isSelectable={false}
+                        CheckBox_selected={false}
+                        {...props}
                     /> 
                 )}
                 </>
@@ -88,6 +83,6 @@ const listePatientCpt = (props :ListePatientsInterface) => {
     )
 }
 listePatientCpt.defaultProps = {
-    preloadCount: 4
+    ListePatient_preloadCount: 2
 }
 export default listePatientCpt;

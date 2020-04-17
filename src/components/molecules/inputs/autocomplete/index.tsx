@@ -5,11 +5,10 @@ import Inputs from '../../../atomics/inputs'
 import {uuid} from 'uuidv4'
 import { InputGeneriqueEvent } from '../../../atomics/inputs/Generique/generique.interface'
 import { propsRechercheInterface } from '../../../atomics/inputs/Recherche'
+import { BullePropsInterface } from '../../../atomics/bulles/default'
 
-export interface AutocompletePropsInterface extends propsRechercheInterface {
-    resultats       :React.ReactElement
-    bulleHeight     :string;
-    bulleShow       :boolean;
+export interface AutocompletePropsInterface extends propsRechercheInterface, BullePropsInterface {
+    Autocomplete_resultats      :React.ReactElement
 }
 
 const Wrapper = styled.div`
@@ -22,11 +21,10 @@ const Autocomplete = (props :AutocompletePropsInterface) => {
         <Wrapper id={id}>
            <Inputs.Recherche {...props} /> 
            <Bulles.Default
-           bulleContainer={id}
-           bulleHeight={props.bulleHeight}
-           bulleShow={props.bulleShow}
+           Bulle_Container={id}
+           {...props}
            >
-               {props.resultats}
+               {props.Autocomplete_resultats}
            </Bulles.Default>
         </Wrapper>
     )

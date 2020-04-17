@@ -43,9 +43,9 @@ export const LignePatientCpt = () => {
             recherche={recherche}
             patients={patients}
             listePatientheight={150}
-            onReset={() => setRecherche('')}
-            bulleHeight={"auto"}
-            bulleShow={recherche.length >= 3}
+            InputRecherche_onReset={() => setRecherche('')}
+            Bulle_Height={"auto"}
+            Bulle_Show={recherche.length >= 3}
             onSelect={handleOnSelect}
             onRechercheChange={handleRechercheChange}
             onLigneClick={handleLigneClick}

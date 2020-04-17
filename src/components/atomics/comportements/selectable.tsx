@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import styled from 'styled-components'
-import Checkbox from '../inputs/Generique/checkbox'
+import Checkbox, { ChekboxProps } from '../inputs/Generique/checkbox'
 import { JumperLignePatientInterface } from '../../molecules/ligne/patient'
 import { handleClickInterface } from '../../../interfaces/handle_click'
 
@@ -9,24 +9,23 @@ display: flex;
 flex-flow: row nowrap;
 `
 
-export interface SelectableInterface {    
-    selectable          :boolean;
-    selected            :boolean;
-    selectablePosition? :string;
-    selectableOnSelect? :(event: handleClickInterface) => handleClickInterface;
+export interface SelectableInterface extends ChekboxProps {    
+    Selectable_isSelectable :boolean;
+    Selectable_Position?    :string;
+    Selectable_OnSelect?    :(event: handleClickInterface) => handleClickInterface;
 }
 
 const Selectable :FunctionComponent<JumperLignePatientInterface> = (props) :React.ReactElement => { 
-    if (props.selectable) {
-        const handleClick = (event :React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (props.Selectable_isSelectable) {
+        const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
             event.stopPropagation();
-            props.selectableOnSelect && props.selectableOnSelect({event, props: {...props}});
+            props.Selectable_OnSelect && props.Selectable_OnSelect({event, props: {...props}});
         }
         return (
             <ItemSelectable>
-                {props.selectablePosition === 'left'   && <Checkbox onClick={handleClick} {...props} />}
+                {props.Selectable_Position === 'left'   && <Checkbox CheckBox_onClick={handleClick} {...props} />}
                     {props.children}
-                {props.selectablePosition === 'right'  && <Checkbox onClick={handleClick} {...props} />}
+                {props.Selectable_Position === 'right'  && <Checkbox CheckBox_onClick={handleClick} {...props} />}
             </ItemSelectable>
         )
     }
@@ -36,8 +35,8 @@ const Selectable :FunctionComponent<JumperLignePatientInterface> = (props) :Reac
 }
 
 Selectable.defaultProps = {
-    selectable: false,
-    selectablePosition: 'left'
+    Selectable_isSelectable: false,
+    Selectable_Position: 'left'
 }
 
 export default Selectable;

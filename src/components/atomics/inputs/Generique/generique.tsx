@@ -18,7 +18,7 @@ import './style.less'
 
 const InputGenerique = (props :InputProps) => {
     // On initialise la valeur initiale avec la props content qui lui ai passé.
-    const [value, setValue] = useState(props.content);
+    const [value, setValue] = useState(props.Input_content);
 
     // Récupération d'une référence vers l'input pour lui donner le focus plus tard
     const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -26,24 +26,25 @@ const InputGenerique = (props :InputProps) => {
     // Quand le composant est monté, si autofocus est rensigné l'input prend le focus
     useEffect(() => {
 
-        if (props.autoFocus)
+        if (props.Input_autoFocus)
             setTimeout(() => inputRef.current.focus({ preventScroll: true }), 100);
 
-    }, [inputRef, props.autoFocus])
+    }, [inputRef, props.Input_autoFocus])
 
     // Au changement du parent 
     useEffect(() => {
-        setValue(props.content);
-    }, [props.content]);
+        setValue(props.Input_content);
+    }, [props.Input_content]);
 
     const handleChange = (event :React.ChangeEvent<HTMLInputElement>) => {
-        if (props.type === 'number' && event.target.value.length > props.maxlength) return false;
+        if (props.Input_type === 'number' && event.target.value.length > props.Input_maxlength) return false;
         let valeur = event.target.value;
 
         // On appel la fonction Parente en cas ou on veut attacher un comportement
-        let valeurChangedFromParent = props.onChange ? props.onChange({
+        let valeurChangedFromParent = props.Input_onChange ? props.Input_onChange({
             value: valeur,
-            isValid: props.validation ? props.validation(valeur) : true
+            isValid: props.Input_validation ? props.Input_validation(valeur) : true,            
+            inputElement: inputRef.current
         }) : valeur
         if (!isNullOrUndefined(valeurChangedFromParent)) {
             valeur = valeurChangedFromParent;
@@ -52,13 +53,14 @@ const InputGenerique = (props :InputProps) => {
     }
 
     const handleKeyPress = (event :React.KeyboardEvent) => {
+        props.Input_onKeyPress && props.Input_onKeyPress({
+            value: value,
+            isValid: props.Input_validation ? props.Input_validation(value) : true,
+            key: event.key,
+            inputElement: inputRef.current
+        });
         if (event.key === 'Enter') {
             // On appel la fonction Parente en cas ou on veut attacher un comportement
-            props.onKeyPress && props.onKeyPress({
-                value: value,
-                isValid: props.validation ? props.validation(value) : true,
-                key: event.key
-            });
             inputRef.current.blur()
         }
     }
@@ -66,58 +68,68 @@ const InputGenerique = (props :InputProps) => {
     const handleBlur = (event :React.FocusEvent<HTMLInputElement>) => {
         // Au Blur on affiche la condition erreur (PopUp + liserais rouge)
         let message = null
-        if (value.length === 0 && props.required) { message = 'Ce champ est requis !' }
-        if (props.validation && !props.validation(value) && value.length > 0) { message = props.errorMessage }
-        props.setError && props.setError(message);
-        props.onBlur && props.onBlur({ value: value, isValid: props.validation(value) })
+        if (value.length === 0 && props.Input_required) { message = 'Ce champ est requis !' }
+        if (props.Input_validation && !props.Input_validation(value) && value.length > 0) { 
+            message = props.Input_errorMessage
+        }
+        props.Input_setError && props.Input_setError(message);
+        props.Input_onBlur && props.Input_onBlur({
+            value: value,
+            isValid: props.Input_validation(value),
+            inputElement: inputRef.current
+        })
     }
 
     const handleFocus = (event :React.FocusEvent<HTMLInputElement>) => {
         // Au Focus on affiche pas la condition erreur (PopUp + liserais rouge)
-        props.setError && props.setError(null);
-        props.onFocus && props.onFocus({ value: value, isValid: props.validation(value) })
+        props.Input_setError && props.Input_setError(null);
+        props.Input_onFocus && props.Input_onFocus({
+            value: value,
+            isValid: props.Input_validation(value),
+            inputElement: inputRef.current
+        })
     }
 
     const inputStyles :React.CSSProperties = {
-        height: props.inputHeight + 'px',
-        width: props.inputWidth + 'px',
-        paddingLeft: props.icone_gauche ? props.inputHeight : props.inputHeight/4,
-        paddingRight: props.icone_droite ? props.inputHeight : props.inputHeight/4
+        height: props.Input_Height + 'px',
+        width: props.Input_Width + 'px',
+        paddingLeft: props.Input_icone_gauche ? props.Input_Height : props.Input_Height/4,
+        paddingRight: props.Input_icone_droite ? props.Input_Height : props.Input_Height/4
     }
 
     const iconeStyles :React.CSSProperties = {
         position: "absolute",
-        width: props.inputHeight,
-        height: props.inputHeight
+        width: props.Input_Height,
+        height: props.Input_Height
     }
     return (
         <>
-            {props.icone_gauche && 
+            {props.Input_icone_gauche && 
                 <div className={"icone_gauche"} style={{...iconeStyles, left:0}}>
-                    {props.icone_gauche}
+                    {props.Input_icone_gauche}
                 </div>
             }
             <input
                 ref={inputRef}
-                name={props.name}
-                minLength={props.minlength}
-                maxLength={props.maxlength}
-                type={props.type}
+                name={props.Input_name}
+                minLength={props.Input_minlength}
+                maxLength={props.Input_maxlength}
+                type={props.Input_type}
                 value={value}
                 onChange={handleChange}
-                className={(props.error ? 'hasError' : '')}
-                placeholder={props.placeHolder}
+                className={(props.Input_error ? 'hasError' : '')}
+                placeholder={props.Input_placeHolder}
                 onKeyPress={handleKeyPress}
                 onBlur={handleBlur}
                 onFocus={handleFocus}
                 style={inputStyles}
-                disabled={props.disabled}
-                required={props.required}
+                disabled={props.Input_disabled}
+                required={props.Input_required}
                 autoComplete="off"
             />
-            {props.icone_droite && 
+            {props.Input_icone_droite && 
                <div className={"icone_droite"} style={{...iconeStyles, right:0}}>
-                   {props.icone_droite}
+                   {props.Input_icone_droite}
                 </div>
             }
         </>
@@ -125,19 +137,20 @@ const InputGenerique = (props :InputProps) => {
 }
 
 InputGenerique.defaultProps = {
-    type: "text",
-    name: "input_generique",
-    errorMessage: "Une erreur empêche la validation de votre saisie",
-    disabled: false,
-    noLabel: false,
-    inputHeight: 30,
-    inputWidth: 210,
-    labelWidth: 150,
-    minlength: 0,
-    maxlength: 99999,
-    required: false,
-    autoFocus: false,
-    error: false
+    Input_type: "text",
+    Input_name: "input_generique",
+    Input_errorMessage: "Une erreur empêche la validation de votre saisie",
+    Input_disabled: false,
+    Input_noLabel: false,
+    Input_inputHeight: 30,
+    Input_inputWidth: 210,
+    Input_labelWidth: 150,
+    Input_label: 'Label',
+    Input_minlength: 0,
+    Input_maxlength: 99999,
+    Input_required: false,
+    Input_autoFocus: false,
+    Input_error: false
 }
 // On attache le comportement avecLabelEstErreur au composant
 export default avecLabelEstErreur(InputGenerique);

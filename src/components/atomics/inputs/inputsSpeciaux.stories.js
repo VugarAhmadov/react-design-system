@@ -40,12 +40,12 @@ export const InputsRecherche = () => {
   return (
     <>
       <Inputs.Recherche
-      placeHolder="Ma recherche"
-      recherche={recherche}
-      onRechercheChange={(ev) => setrecherche(ev.value)}
-      onRechercheReset={() => setrecherche('')}
-      lanceRecherche={(value) => console.log(value)}
-      noLabel
+      Input_placeHolder="Ma recherche"
+      InputRecherche_recherche={recherche}
+      InputRecherche_onChange={(ev) => setrecherche(ev.value)}
+      InputRecherche_onReset={() => setrecherche('')}
+      InputRecherche_lanceRecherche={(value) => console.log(value)}
+      Input_noLabel
       />
     </>
   );

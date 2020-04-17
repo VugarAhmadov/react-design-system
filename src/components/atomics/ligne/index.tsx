@@ -16,15 +16,15 @@ background-color: ${(props :any) => props.selected ?  'rgba(241, 241, 241, 0.5)'
 }
 `
 export interface LigneInterface extends SelectableInterface {
-    onLigneClick?       :(event: handleClickInterface) => handleClickInterface;
-    ligneStyle?         :React.CSSProperties;
+    Ligne_onClick?       :(event: handleClickInterface) => handleClickInterface;
+    Ligne_Style?         :React.CSSProperties;
 }
 
 const LigneCpt :FunctionComponent<LigneInterface> = (props) :React.ReactElement => {
     return (
         <Ligne 
-        style={{...props.ligneStyle}} 
-        onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => props.onLigneClick && props.onLigneClick({event: event, props: props})}>
+        style={{...props.Ligne_Style}} 
+        onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => props.Ligne_onClick && props.Ligne_onClick({event: event, props: props})}>
             <Selectable {...props}>
                 {props.children}
             </Selectable>

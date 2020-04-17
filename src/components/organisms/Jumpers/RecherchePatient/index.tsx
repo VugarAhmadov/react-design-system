@@ -33,15 +33,15 @@ const RecherchePatient = (props :JumperPatientInterface) => {
     <>
         <HeaderRecherche>DOSSIERS PATIENTS CONSULTES RECEMMENTS</HeaderRecherche>
         <ListePatient
-            selectablePosition='right'
+            Selectable_Position='right'
             {...props}
         />
     </>
     return (
         <Autocomplete         
-        resultats={ContenuDeLaPopUp}
+        Autocomplete_resultats={ContenuDeLaPopUp}
+        Input_noLabel
         {...props}
-        noLabel
         />
     )
 };

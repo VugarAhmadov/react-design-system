@@ -11,31 +11,17 @@ import {
 } from '../../../../helpers/helpers'
 import Skeleton from '../../../atomics/skeleton'
 import moment from 'moment'
-import Ligne from '../../../atomics/ligne'
+import Ligne, { LigneInterface } from '../../../atomics/ligne'
 import NumeroSecuInterface from '../../../../interfaces/numero_secu'
 import NomPatient from '../../../../interfaces/nom_patient';
 import { handleClickInterface } from '../../../../interfaces/handle_click'
+import { JumperPatient } from '../../../../interfaces/patient_jumper'
+import { SelectableInterface } from '../../../atomics/comportements/selectable'
+import { ChekboxProps } from '../../../atomics/inputs/Generique/checkbox'
 
-export interface JumperLignePatientInterface {
-    Id?                 :string|number;
-    IdOds?              :string|number;
-    Civilite?           :string|undefined;
-    NomPat?             :string|undefined;
-    NomUsuel?           :string|undefined;
-    Prenom?             :string|undefined;
-    DateNaissance?      :string|undefined;
-    Portable?           :string|undefined;
-    Fixe?               :string|undefined;
-    NumINSEE?           :string|undefined;
-    ClefINSEE?          :string|undefined;
-    //ProchainRdv       :string;
-    PratReferent?       :string|undefined;
-    selectable          :boolean;
-    selected            :boolean;
-    selectablePosition? :string;
-    selectableOnSelect? :(event :handleClickInterface) => handleClickInterface;
-    onLigneClick?       :(event :handleClickInterface) => handleClickInterface;
-    ligneStyle?         :React.CSSProperties;
+export interface JumperLignePatientInterface extends LigneInterface, JumperPatient, SelectableInterface {    
+    Ligne_onClick?      :(event :handleClickInterface) => handleClickInterface;
+    Ligne_Style?        :React.CSSProperties;
 }
 
 const BlockNumero = styled.div`
