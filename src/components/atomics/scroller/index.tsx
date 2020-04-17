@@ -31,12 +31,12 @@ const Scrollbar :FunctionComponent<ScrollbarInterface> = (props) => {
                 className={props.Scroller_className}
                 option={props.Scroller_Option}
                 onYReachStart={() => {
-                    ScrollerRef.current?._container.classList.remove("scrolled");
+                    //ScrollerRef.current?._container.classList.remove("scrolled");
                     props.onYReachStart && props.onYReachStart()
                 }}
                 onYReachEnd={() => props.onYReachEnd}
                 onScrollDown={() => {
-                    ScrollerRef.current?._container.classList.add("scrolled")
+                    //ScrollerRef.current?._container.classList.add("scrolled")
                     props.onScrollDown && props.onScrollDown()
                 }}
                 onScrollY={() => props.onScrollY}

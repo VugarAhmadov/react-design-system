@@ -48,11 +48,11 @@ export default (props :any) => {
 
     return (
         <Inputs.Generic
-            type="text"
-            name="rpps"
-            maxlength={20}
-            validation={validRpps}
-            onChange={({ value }) => formatRPPS(value)}
+            Input_type="text"
+            Input_name="rpps"
+            Input_maxlength={20}
+            Input_validation={validRpps}
+            Input_onChange={({ value }) => formatRPPS(value)}
             {...props}
         />
     );

@@ -18,12 +18,12 @@ const InputsFiness :FunctionComponent<any> = (props) => {
 
     return (
         <Inputs.Generic
-            type="text"
-            name="finess"
-            maxlength={9}
-            validation={validFiness}
-            onChange={formatFiness}
-            errorMessage={"Il doit comporter 9 chiffres "}
+        Input_type="text"
+        Input_name="finess"
+        Input_maxlength={9}
+        Input_validation={validFiness}
+        Input_onChange={formatFiness}
+        Input_errorMessage={"Il doit comporter 9 chiffres "}
             {...props}
         />
     );
