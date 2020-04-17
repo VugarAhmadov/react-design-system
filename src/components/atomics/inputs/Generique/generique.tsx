@@ -59,10 +59,7 @@ const InputGenerique = (props :InputProps) => {
             key: event.key,
             inputElement: inputRef.current
         });
-        if (event.key === 'Enter') {
-            // On appel la fonction Parente en cas ou on veut attacher un comportement
-            inputRef.current.blur()
-        }
+        
     }
 
     const handleBlur = (event :React.FocusEvent<HTMLInputElement>) => {
@@ -142,8 +139,8 @@ InputGenerique.defaultProps = {
     Input_errorMessage: "Une erreur empêche la validation de votre saisie",
     Input_disabled: false,
     Input_noLabel: false,
-    Input_inputHeight: 30,
-    Input_inputWidth: 210,
+    Input_Height: 30,
+    Input_Width: 210,
     Input_labelWidth: 150,
     Input_label: 'Label',
     Input_minlength: 0,

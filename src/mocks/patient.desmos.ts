@@ -16,6 +16,7 @@ export const PatientDesmosJumper = {
     Archive:false,
     Alerte:false,
     EstOuvert:false,
-    ProchainRdv:[]
+    ProchainRdv:[],
+    Selected: false
   }
   

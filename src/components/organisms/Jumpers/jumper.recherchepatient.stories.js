@@ -40,16 +40,16 @@ export const LignePatientCpt = () => {
 
     return (
         <RecherchePatient
-            recherche={recherche}
-            patients={patients}
-            listePatientheight={150}
+            InputRecherche_recherche={recherche}
+            ListePatient_patients={patients}
+            ListePatient_Height={150}
             InputRecherche_onReset={() => setRecherche('')}
             Bulle_Height={"auto"}
             Bulle_Show={recherche.length >= 3}
-            onSelect={handleOnSelect}
-            onRechercheChange={handleRechercheChange}
-            onLigneClick={handleLigneClick}
-            selectable={selectableBool}
+            InputRecherche_onSelect={handleOnSelect}
+            InputRecherche_onChange={handleRechercheChange}
+            Ligne_onClick={handleLigneClick}
+            Selectable_isSelectable={selectableBool}
         />
     ) 
 };

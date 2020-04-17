@@ -12,14 +12,14 @@ flex-flow: row nowrap;
 export interface SelectableInterface extends ChekboxProps {    
     Selectable_isSelectable :boolean;
     Selectable_Position?    :string;
-    Selectable_OnSelect?    :(event: handleClickInterface) => handleClickInterface;
+    Selectable_onSelect?    :(event: handleClickInterface) => handleClickInterface;
 }
 
 const Selectable :FunctionComponent<JumperLignePatientInterface> = (props) :React.ReactElement => { 
     if (props.Selectable_isSelectable) {
         const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
             event.stopPropagation();
-            props.Selectable_OnSelect && props.Selectable_OnSelect({event, props: {...props}});
+            props.Selectable_onSelect && props.Selectable_onSelect({event, props: {...props}});
         }
         return (
             <ItemSelectable>

@@ -40,9 +40,9 @@ name: 'Input générique avec une icône à gauche',
 
 export const InputsIconeDroite = () => (
   <Inputs.Generic
-  icone_droite={<Icones.Loupe />}
-  label="Je suis le label"
-  errorMessage="Message d'erreur !"
+  Input_icone_droite={<Icones.Loupe />}
+  Input_label="Je suis le label"
+  Input_errorMessage="Message d'erreur !"
   />
 );
 
@@ -54,9 +54,9 @@ name: 'Input générique avec une icône à droite',
 
 export const InputsIconeDroiteColor = () => (
   <Inputs.Generic
-  icone_droite={<Icones.Loupe style={{color: "red"}}/>}
-  label="Je suis le label"
-  errorMessage="Message d'erreur !"
+  Input_icone_droite={<Icones.Loupe style={{color: "red"}}/>}
+  Input_label="Je suis le label"
+  Input_errorMessage="Message d'erreur !"
   />
 );
 
@@ -67,9 +67,9 @@ name: 'Input générique avec une icône coloré à droite',
 
 export const InputChangementPlaceholder = () => (
   <Inputs.Generic
-  placeHolder="Nouveau placeholder"
-  label="Je suis le label"
-  errorMessage="Message d'erreur !"
+  Input_placeHolder="Nouveau placeholder"
+  Input_label="Je suis le label"
+  Input_errorMessage="Message d'erreur !"
   />
 );
 

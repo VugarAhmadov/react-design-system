@@ -61,9 +61,7 @@ const Bulle :FunctionComponent<BullePropsInterface> = (props) => {
     }, []);
 
     const GetParentHeight = () => {
-        console.log("containerRef?.current", containerRef?.current)
         if (containerRef?.current !== undefined && containerRef?.current!== null ) {
-
             //Permet de positionner la bulle en dessous de l'element parent
             return `${containerRef.current.offsetHeight+ 2}px`;
         }

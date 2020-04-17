@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.less'
 
 export interface ChekboxProps {
@@ -10,6 +10,7 @@ export interface ChekboxProps {
 }
 
 const CheckBox = ( props :ChekboxProps) => {
+
     const handleChange = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         if (!props.CheckBox_disabled && !props.CheckBox_locked) {
             props.CheckBox_onClick(event)
@@ -18,13 +19,11 @@ const CheckBox = ( props :ChekboxProps) => {
     return (
         <span className="spanInputCheckBox" onClick={handleChange}>
             <input
-                className={"checkbox-component " + props.CheckBox_className}
-                value={props.CheckBox_selected ? '1' : '0'}
-                type="checkbox"
-                checked={props.CheckBox_selected}
-                onChange={() => { /* Sera géré par le onClick de la span supérieur */ }}
-                tabIndex={1}
-                disabled={props.CheckBox_locked}
+            className={"checkbox-component " + props.CheckBox_className}
+            type="checkbox"
+            value={props.CheckBox_selected ? 1 : 0}
+            tabIndex={1}
+            disabled={props.CheckBox_locked}
             />
             <span></span>
         </span>

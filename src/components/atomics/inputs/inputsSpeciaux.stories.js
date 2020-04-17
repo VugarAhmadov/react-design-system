@@ -33,8 +33,8 @@ export const InputsFiness = () => (
 InputsFiness.story = {
   name: 'Input de type Finess',
 };
-
 export const InputsRecherche = () => {
+
   const [recherche, setrecherche] = useState('')
   
   return (

@@ -30,7 +30,7 @@ const listePatientCpt = (props :ListePatientsInterface) => {
         style={{...props.ListePatient_wrapperStyle}}
         {...props}
         >
-            <Scroller scrollerHeight={props.ListePatient_Height +'px'}>
+            <Scroller Scroller_Height={props.ListePatient_Height }>
                 {props.ListePatient_patients
                 ?
                 <>

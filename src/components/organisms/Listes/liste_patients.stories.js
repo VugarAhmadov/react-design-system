@@ -20,20 +20,19 @@ export const LignePatientCpt = () => {
     const [patients, setPatients] = useState(listePatient)
     const [selectableBool, setSelectable] = useState(false)
     useEffect(() => {
-        setTimeout(() => {
-            if (patients && patients.length > 0 ) {
-            return setPatients(null)
-            }
-            return setPatients(listePatient)
-        }, 5000)
+        // setTimeout(() => {
+        //     if (patients && patients.length > 0 ) {
+        //     return setPatients(null)
+        //     }
+        //     return setPatients(listePatient)
+        // }, 2000)
     }, [patients])
 
     const handleOnSelect = (evenement) => {
-        let pat = patients.find(p => p.Id === evenement.Id);
-        if (pat) {
-            pat.selected = !pat.selected
-        }
-        setPatients([...listePatient])
+        let pat = patients.find(p => p.Id === evenement.props.Id);
+        
+        console.log(patients)
+        setPatients([...patients])
     }
 
     const handleLigneClick = () => {
@@ -43,11 +42,11 @@ export const LignePatientCpt = () => {
 
     return (
         <ListePatient
-        patients={patients}
-        height={'120px'}
-        onSelect={handleOnSelect}
-        onLigneClick={handleLigneClick}
-        selectable={selectableBool}
+        ListePatient_patients={patients}
+        ListePatient_Height={'120px'}
+        Selectable_onSelect={handleOnSelect}
+        Ligne_onClick={handleLigneClick}
+        Selectable_isSelectable={selectableBool}
         />
     ) 
 };

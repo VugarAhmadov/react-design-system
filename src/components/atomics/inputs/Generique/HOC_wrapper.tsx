@@ -23,7 +23,7 @@ export function avecLabelEstErreur(WrappedInput :FunctionComponent<InputProps>) 
         } = props
 
         // On génère une id unique afin de pouvoir afficher la popup en cas d'erreur
-        const id = name + '-' + uuid()
+        const id = Input_name + '-' + uuid()
         const [stateError, setStateError] = useState('');
     
         const handleSetError = (val :string|null) :void => {

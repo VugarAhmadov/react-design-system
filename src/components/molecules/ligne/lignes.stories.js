@@ -4,7 +4,6 @@ import React, {
 } from 'react';
 import { withActions } from '@storybook/addon-actions';
 import Lignes from '.'
-import moment from 'moment';
 
 import { 
   PatientDesmosJumper
@@ -12,16 +11,24 @@ import {
 
 export const LignePatientCpt = () => {
   const [infoPatient, setinfoPatient] = useState(null);
+
   useEffect(() => {
-    setTimeout(() => {      
+    setTimeout(() => {  
+          console.log("PatientDesmosJumper",PatientDesmosJumper)
       return setinfoPatient(PatientDesmosJumper)
-    }, 5000)
+    }, 2500)
   }, [])
 
+  useEffect(() => {
+   console.log("INFO PATIENT A CHANGE => ", infoPatient)
+  }, [infoPatient])
+
   const setSelected = () => {
-    infoPatient.selected = !infoPatient.selected 
-    setinfoPatient({selected: !infoPatient.selected , ...infoPatient})
+    if (infoPatient) {
+      setinfoPatient({...infoPatient, Selected: !infoPatient.Selected })
+    }
   }
+
   return (
     <Lignes.Patient
     Id={infoPatient ? infoPatient.Id: null}
@@ -36,12 +43,11 @@ export const LignePatientCpt = () => {
     Fixe={infoPatient ? infoPatient.Fixe: null}
     Portable={infoPatient ? infoPatient.Portable: null}
     PratReferent={infoPatient ? infoPatient.PratReferent: null}
-    selected={infoPatient ? infoPatient.selected: null}
-    onLigneClick={() => console.log("PATIENT CLICK")}
-    selected={infoPatient ? infoPatient.selected: null}
-    onSelect={()=> setSelected()}
-    selectablePosition={'right'}
-    selectable
+    Ligne_onClick={() => console.log("PATIENT CLICK => ", infoPatient)}
+    CheckBox_selected={infoPatient ? infoPatient.Selected: null}
+    Selectable_onSelect={()=> setSelected()}
+    Selectable_Position={'right'}
+    Selectable_isSelectable
     />
   )
 };

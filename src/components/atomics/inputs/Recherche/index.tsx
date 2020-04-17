@@ -19,29 +19,43 @@ export default (props :propsRechercheInterface) => {
     const [recherche, setRecherche] = useState(props.InputRecherche_recherche);
 
     useEffect(() => {
-        console.log("PROPS.RECHERCHE", props.InputRecherche_recherche)
         setRecherche(props.InputRecherche_recherche) 
         props.InputRecherche_recherche != undefined ? setActive(props.InputRecherche_recherche.length > 0) : setActive(false);
     }, [props.InputRecherche_recherche])
 
     const changeRecherche = (event :InputGeneriqueEvent) => {
-        props.InputRecherche_onChange && props.InputRecherche_onChange(event)
+        if (props.InputRecherche_onChange) {
+            return props.InputRecherche_onChange(event)
+        }
+        throw new Error('InputRecherche_onChange() doit être implémenté pour l`\'utilisation d\'input !');
+       
     }
     
     const reset = () => {
-        props.InputRecherche_onReset && props.InputRecherche_onReset()
+        if (props.InputRecherche_onReset ) {
+            props.InputRecherche_onReset()
+        }
+        throw new Error('InputRecherche_onReset() doit être implémenté pour le click sur l\'icone !');
     }
     
     const Icone = active ? <Icones.Croix onClick={reset} /> : <Icones.Loupe style={{color: '#727272',  opacity: 0.5}}/>
     
+    const handleKeyPress = (event :InputGeneriqueEvent) => {
+        props.InputRecherche_lanceRecherche && props.InputRecherche_lanceRecherche(event.value)
+        if (event.key === 'Enter') {
+            // On appel la fonction Parente en cas ou on veut attacher un comportement
+            event.inputElement?.blur()
+        }
+    }
+
     return (
         <Inputs.Generic
             Input_type="text"
-            Input_content={recherche}
+            Input_content={props.InputRecherche_recherche}
             Input_name="recherche"
             Input_icone_droite={Icone}
             Input_onChange={(event) => changeRecherche(event)}
-            Input_onKeyPress={({ value }) => props.InputRecherche_lanceRecherche(value)}
+            Input_onKeyPress={handleKeyPress}
             {...props}
         />
     );

@@ -59,22 +59,22 @@ export const AutocompleteCpt = () => {
     return (
         <div style={{height: '100vh'}}>
             <Autocomplete 
-            recherche={recherche}
-            onRechercheChange={(ev) => setRecherche(ev.value)}
-            onRechercheReset={() => setRecherche('')}
-            bulleShow={showBulle}
-            bulleHeight={'350px'}
-            bulleWidth={'100%'}
-            resultats={
+            InputRecherche_recherche={recherche}
+            InputRecherche_onChange={(ev) => setRecherche(ev.value)}
+            InputRecherche_onReset={() => setRecherche('')}
+            Bulle_Show={showBulle}
+            Bulle_Height={'350px'}
+            Bulle_Width={'100%'}
+            Autocomplete_resultats={
                 <ListePatient
-                    patients={resultats}
-                    onSelect={() => {console.log("SELECT")}}
-                    onLigneClick={() => {console.log('CLIQUE LIGNE')}}
-                    selectablePosition='right'
-                    selectable={true}
+                ListePatient_patients={resultats}                
+                Selectable_OnSelect={(e) => {console.log("SELECT", e)}}
+                Ligne_onClick={() => {console.log('CLIQUE LIGNE')}}
+                Selectable_Position='right'
+                Selectable_isSelectable={true}
                 />
             }
-            noLabel
+            Input_noLabel
             />
         </div>
     )
