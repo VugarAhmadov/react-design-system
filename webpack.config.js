@@ -17,7 +17,7 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
+        loader: 'awesome-typescript-loader?module=es6',
         exclude: /node_modules/,
         query: {
           declaration: true,
