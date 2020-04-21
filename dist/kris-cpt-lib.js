@@ -22660,7 +22660,7 @@ const Bulle = (props) => {
         return '0px';
     };
     return (external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(portal, { container: "#" + props.Bulle_Container, portalStyles: { transform: `translateY(${GetParentHeight()})`, overflow: 'hidden', padding: '4px' } },
-        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(Wrapper, Object.assign({ className: props.Bulle_Show ? 'show' : '', ref: bulleRef }, props), props.children)));
+        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(Wrapper, Object.assign({ className: props.Bulle_Show ? 'show' : '', ref: bulleRef }, props, { onClick: e => e.stopPropagation() }), props.children)));
 };
 Bulle.defaultProps = {
     Bulle_Height: '30',
@@ -23951,8 +23951,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 font-family: Lato;
-font-style: italic;
-font-weight: bold;
 font-size: 16px;
 text-align: center;
 color: #97989D;
@@ -23966,6 +23964,9 @@ font-family: Lato;
 font-size: 18px;
 color: #333333;
 line-height: 30px
+display: flex;
+justify-content: center;
+align-items: center;
 `;
 const RecherchePatient = (props) => {
     const isRechercheActive = !(props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis);
@@ -23977,17 +23978,17 @@ const RecherchePatient = (props) => {
                 "DOSSIERS PATIENTS TROUVES. ",
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("small", null, "Essayez de compl\u00E9ter votre recherche"))
             :
-                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null, `DOSSIER PATIENT TROUVE${count > 1 ? 'S' : ''}.`);
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null, `DOSSIER${count > 1 ? 'S' : ''} PATIENT${count > 1 ? 'S' : ''} TROUVE${count > 1 ? 'S' : ''}.`);
     };
     const header = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, !isRechercheActive ?
-        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, hasResultats && external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null, "DOSSIERS PATIENTS CONSULTES RECEMMENTS"))
+        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, hasResultats ?
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null, "DOSSIERS PATIENTS CONSULTES RECEMMENTS")
+            :
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null, "Aucun dossier patient  consult\u00E9 aujourd\u2019hui"))
         :
             external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, hasResultats &&
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null,
-                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(NbFind, null, props.ListePatient_patients.length >= 49 ?
-                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, " + de 50")
-                        :
-                            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, props.ListePatient_patients.length)),
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(NbFind, null, props.ListePatient_patients.length >= 49 ? '+ de 50' : props.ListePatient_patients.length),
                     formatHeader())));
     const body = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, !isRechercheActive ?
         external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, !hasResultats ?
@@ -23998,7 +23999,7 @@ const RecherchePatient = (props) => {
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("br", null),
                 "N\u00B0 de facture, de dossier, de FSE\u2026")
             :
-                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosContent, null, "Aucun dossier patient  consult\u00E9 aujourd\u2019hui"))
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(Patients, Object.assign({ Selectable_Position: 'right' }, props)))
         :
             external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, hasResultats ?
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosContent, null,

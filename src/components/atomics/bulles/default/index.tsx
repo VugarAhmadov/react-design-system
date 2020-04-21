@@ -75,7 +75,7 @@ const Bulle :FunctionComponent<BullePropsInterface> = (props) => {
             container={"#" + props.Bulle_Container}
             portalStyles={{transform: `translateY(${GetParentHeight()})`, overflow: 'hidden', padding: '4px'}}
         >
-            <Wrapper className={props.Bulle_Show ? 'show' : ''} ref={bulleRef} {...props}>
+            <Wrapper className={props.Bulle_Show ? 'show' : ''} ref={bulleRef} {...props} onClick={e => e.stopPropagation()}>
                 {props.children}
             </Wrapper>
         </Portal>

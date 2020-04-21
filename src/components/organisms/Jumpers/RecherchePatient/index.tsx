@@ -95,8 +95,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 font-family: Lato;
-font-style: italic;
-font-weight: bold;
 font-size: 16px;
 text-align: center;
 color: #97989D;
@@ -111,6 +109,9 @@ font-family: Lato;
 font-size: 18px;
 color: #333333;
 line-height: 30px
+display: flex;
+justify-content: center;
+align-items: center;
 `
 
 const RecherchePatient = (props :JumperPatientInterface) => {
@@ -123,25 +124,25 @@ const RecherchePatient = (props :JumperPatientInterface) => {
         return count >= 49 ?
             <InfosHeader>DOSSIERS PATIENTS TROUVES. <small>Essayez de compléter votre recherche</small></InfosHeader>
             :
-            <InfosHeader>{`DOSSIER PATIENT TROUVE${count > 1 ? 'S' : ''}.`}</InfosHeader>            
+            <InfosHeader>{`DOSSIER${count > 1 ? 'S' : ''} PATIENT${count > 1 ? 'S' : ''} TROUVE${count > 1 ? 'S' : ''}.`}</InfosHeader>            
     };
 
     const header = 
     <>
         {!isRechercheActive ?
             <>
-                {hasResultats && <InfosHeader>DOSSIERS PATIENTS CONSULTES RECEMMENTS</InfosHeader>}
+                {hasResultats ?
+                <InfosHeader>DOSSIERS PATIENTS CONSULTES RECEMMENTS</InfosHeader>
+                :
+                <InfosHeader>Aucun dossier patient  consulté aujourd’hui</InfosHeader>
+                }
             </>
         :
             <>
                 {hasResultats &&
                     <InfosHeader>
                         <NbFind>
-                            {props.ListePatient_patients.length >= 49 ?
-                                <p> + de 50</p>
-                            :
-                                <p>{props.ListePatient_patients.length}</p>
-                            }
+                            {props.ListePatient_patients.length >= 49 ? '+ de 50' : props.ListePatient_patients.length}
                         </NbFind>
                         {formatHeader()}
                     </InfosHeader>
@@ -161,7 +162,10 @@ const RecherchePatient = (props :JumperPatientInterface) => {
                         N° de facture, de dossier, de FSE…
                     </InfosContent>
                 :
-                <InfosContent>Aucun dossier patient  consulté aujourd’hui</InfosContent>
+                    <ListePatient
+                    Selectable_Position='right'
+                    {...props}
+                    />
                 }                    
             </>
         :

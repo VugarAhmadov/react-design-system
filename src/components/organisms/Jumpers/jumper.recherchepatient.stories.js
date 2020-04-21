@@ -17,6 +17,7 @@ const listePatient = [
 
 export const LignePatientCpt = () => {
     const [recherche, setRecherche] = useState('');
+    const [bulleActive, setBulleActive] = useState(false);
     const [patients, setPatients] = useState(listePatient);
     const [selectableBool, setSelectable] = useState(false);
 
@@ -45,11 +46,12 @@ export const LignePatientCpt = () => {
             ListePatient_Height={150}
             InputRecherche_onReset={() => setRecherche('')}
             Bulle_Height={"auto"}
-            Bulle_Show={recherche.length >= 3}
+            Bulle_Show={bulleActive}
             InputRecherche_onSelect={handleOnSelect}
             InputRecherche_onChange={handleRechercheChange}
             Ligne_onClick={handleLigneClick}
             Selectable_isSelectable={selectableBool}
+            Input_onFocus={() => setBulleActive(true)}
         />
     ) 
 };
