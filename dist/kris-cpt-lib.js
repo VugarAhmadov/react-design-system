@@ -23183,7 +23183,9 @@ monsieur_Icone.defaultProps = {
         if (props.InputRecherche_onReset) {
             props.InputRecherche_onReset();
         }
-        throw new Error('InputRecherche_onReset() doit être implémenté pour le click sur l\'icone !');
+        else {
+            throw new Error('InputRecherche_onReset() doit être implémenté pour le click sur l\'icone !');
+        }
     };
     const Icone = active ? external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(icones.Croix, { onClick: reset }) : external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(icones.Loupe, { style: { color: '#727272', opacity: 0.5 } });
     const handleKeyPress = (event) => {
