@@ -40,8 +40,8 @@ const listePatientCpt = (props :ListePatientsInterface) => {
                     Id={patient.Id}
                     IdOds={patient.IdOds}
                     NomPat={patient.NomPat}
-                    NomUsuel={patient.NomPat}
-                    Prenom={patient.NomPat}
+                    NomUsuel={patient.NomUsuel}
+                    Prenom={patient.Prenom}
                     DateNaissance={patient.DateNaissance}
                     Civilite={patient.Civilite?.toLocaleLowerCase()}
                     NumINSEE={patient.NumINSEE}
