@@ -65,15 +65,15 @@ const LignePatient :FunctionComponent<JumperLignePatientInterface> = (props :Jum
                     verbeNaitre= 'Née'
                     break;
             }
-            return <>{verbeNaitre} le {moment(props.DateNaissance).format('DD/MM/YYYY')}, <span style={{fontFamily: 'Lato-Italic'}}>suivi par {props.PratReferent}</span></>
+            return <>{verbeNaitre} le {moment(props.DateNaissance,'DD/MM/YYYY').format('DD/MM/YYYY')}, <span style={{fontFamily: 'Lato-Italic'}}>suivi par {props.PratReferent}</span></>
         }
         return <Skeleton.Rectangle />
     }
 
     const formatAge = () => {
         if (props.DateNaissance){     
-            var diff = moment().diff(props.DateNaissance, 'years');
-            var diffMois = moment().diff(props.DateNaissance, 'months');
+            var diff = moment().diff(moment(props.DateNaissance,'DD/MM/YYYY'), 'years');
+            var diffMois = moment().diff(moment(props.DateNaissance,'DD/MM/YYYY'), 'months');
             if (diff > 0) return `${diff} ans` 
             return `${diffMois} mois`
         }
