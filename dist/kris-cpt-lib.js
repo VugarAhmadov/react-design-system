@@ -23687,7 +23687,7 @@ const LignePatient = (props) => {
             return external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null,
                 verbeNaitre,
                 " le ",
-                moment_default()(props.DateNaissance).format('DD/MM/YYYY'),
+                moment_default()(props.DateNaissance, 'DD/MM/YYYY').format('DD/MM/YYYY'),
                 ", ",
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("span", { style: { fontFamily: 'Lato-Italic' } },
                     "suivi par ",
@@ -23697,8 +23697,8 @@ const LignePatient = (props) => {
     };
     const formatAge = () => {
         if (props.DateNaissance) {
-            var diff = moment_default()().diff(props.DateNaissance, 'years');
-            var diffMois = moment_default()().diff(props.DateNaissance, 'months');
+            var diff = moment_default()().diff(moment_default()(props.DateNaissance, 'DD/MM/YYYY'), 'years');
+            var diffMois = moment_default()().diff(moment_default()(props.DateNaissance, 'DD/MM/YYYY'), 'months');
             if (diff > 0)
                 return `${diff} ans`;
             return `${diffMois} mois`;
