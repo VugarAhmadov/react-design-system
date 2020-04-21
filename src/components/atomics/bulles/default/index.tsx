@@ -11,13 +11,14 @@ import Portal from '../../portal'
 
 export interface BullePropsInterface {
     Bulle_Height      :string;
+    Bulle_Width       :string;
     Bulle_Container   :string;
     Bulle_Show        :boolean;
 }
 
 const Wrapper = styled.div`
 position: relative;
-width:100%;
+width:${(props: BullePropsInterface) => props.Bulle_Width ? props.Bulle_Width : '100%'};
 height: 0px;
 background-color: rgba(255,255,255,1);
 font-family: Lato-Bold;

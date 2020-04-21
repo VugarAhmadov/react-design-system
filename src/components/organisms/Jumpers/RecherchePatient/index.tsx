@@ -154,7 +154,7 @@ const RecherchePatient = (props :JumperPatientInterface) => {
     <>
         {!isRechercheActive ? 
             <>
-                {hasResultats ?
+                {!hasResultats ?
                     <InfosContent>
                         Vous pouvez rechercher par Nom et prénom du client, <br />
                         date de naissance, numéro de sécu, <br />
@@ -193,6 +193,8 @@ const RecherchePatient = (props :JumperPatientInterface) => {
         <Autocomplete         
         Autocomplete_resultats={ContenuDeLaPopUp}
         Input_noLabel
+        Bulle_Height={400}
+        Bulle_Width={600}
         {...props}
         />
     )

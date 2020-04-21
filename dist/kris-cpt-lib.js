@@ -22612,7 +22612,7 @@ Portal.defaultProps = {
 
 const Wrapper = styled_components_browser_esm["a" /* default */].div `
 position: relative;
-width:100%;
+width:${(props) => props.Bulle_Width ? props.Bulle_Width : '100%'};
 height: 0px;
 background-color: rgba(255,255,255,1);
 font-family: Lato-Bold;
@@ -23990,7 +23990,7 @@ const RecherchePatient = (props) => {
                             external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, props.ListePatient_patients.length)),
                     formatHeader())));
     const body = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, !isRechercheActive ?
-        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, hasResultats ?
+        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, !hasResultats ?
             external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosContent, null,
                 "Vous pouvez rechercher par Nom et pr\u00E9nom du client, ",
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("br", null),
@@ -24011,7 +24011,7 @@ const RecherchePatient = (props) => {
     const ContenuDeLaPopUp = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null,
         header,
         body);
-    return (external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(autocomplete, Object.assign({ Autocomplete_resultats: ContenuDeLaPopUp, Input_noLabel: true }, props)));
+    return (external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(autocomplete, Object.assign({ Autocomplete_resultats: ContenuDeLaPopUp, Input_noLabel: true, Bulle_Height: 400, Bulle_Width: 600 }, props)));
 };
 RecherchePatient.defaultProps = {
     RecherchePatient_minimumRequis: 3
