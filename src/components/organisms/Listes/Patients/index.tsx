@@ -50,6 +50,8 @@ const listePatientCpt = (props :ListePatientsInterface) => {
                     Portable={patient.Portable}
                     PratReferent={patient.PratReferent}
                     CheckBox_selected={patient.Selected}
+                    ProchainRdv={patient.ProchainRdv}
+                    CentreEnCours={patient.CentreEnCours}
                     {...props}
                     />
                 )}

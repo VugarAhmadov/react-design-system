@@ -16,7 +16,12 @@ export const PatientDesmosJumper = {
     Archive:false,
     Alerte:false,
     EstOuvert:false,
-    ProchainRdv:[],
-    Selected: false
+    ProchainRdv:[{
+      idCentre: '1',
+      Date: '2020-07-15',
+      Couleur: '1a70b1'
+    }],
+    Selected: false,
+    CentreEnCours:'1'
   }
   

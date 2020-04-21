@@ -1,3 +1,9 @@
+export interface RendezVousJumper {
+    Couleur :string;
+    idCentre:string;
+    Date    :string;
+}
+
 export interface JumperPatient {
     Id?                 :string|number;
     IdOds?              :string|number;
@@ -10,7 +16,8 @@ export interface JumperPatient {
     Fixe?               :string|undefined;
     NumINSEE?           :string|undefined;
     ClefINSEE?          :string|undefined;
-    //ProchainRdv       :string;
+    ProchainRdv?        :Array<RendezVousJumper>;
     PratReferent?       :string|undefined;
     Selected?           :boolean;
+    CentreEnCours?      :string;
 }

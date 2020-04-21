@@ -12,12 +12,9 @@ import {
 import Skeleton from '../../../atomics/skeleton'
 import moment from 'moment'
 import Ligne, { LigneInterface } from '../../../atomics/ligne'
-import NumeroSecuInterface from '../../../../interfaces/numero_secu'
-import NomPatient from '../../../../interfaces/nom_patient';
 import { handleClickInterface } from '../../../../interfaces/handle_click'
 import { JumperPatient } from '../../../../interfaces/patient_jumper'
 import { SelectableInterface } from '../../../atomics/comportements/selectable'
-import { ChekboxProps } from '../../../atomics/inputs/Generique/checkbox'
 
 export interface JumperLignePatientInterface extends LigneInterface, JumperPatient, SelectableInterface {    
     Ligne_onClick?      :(event :handleClickInterface) => handleClickInterface;
@@ -38,6 +35,65 @@ width: 180px;
 align-items:center;
 justify-content: flex-end;
 `
+
+const ProchainRendezVous_Container = styled.div`
+&.prochainRdv {
+    margin-left: 40px;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    
+    .prochainRdv_container {
+        display: flex;
+        flex-flow: row;
+        height: 40px;
+    
+        .prochainRdv_barreColor {
+            width: 4px;
+            height: 40px;
+            background-color: red;
+        }
+    
+        .prochainRdv_date {
+            display: flex;
+            flex-flow: column;
+            font-family: Lato;
+            margin-left: 6px;
+            display: flex;
+            justify-content: center;
+    
+            &_day {
+                height: 20px;
+                line-height: 20px;
+                font-size: 11px;
+                color: #666666;
+                width: 100%;
+            }
+    
+            &_hour {
+                height: 20px;
+                line-height: 20px;
+                font-size: 13px;
+                color: #000000;
+                width: 100%;
+            }
+        }
+    }
+    
+    .prochainRdv_noRdv {
+        font-family: LatoItalic;
+        font-size: 11px;
+        color: #97989D;
+        display: flex;
+        padding-left: 10px;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+`
+
 
 const GetIcone =  (civilite:string|undefined) :JSX.Element|null =>  {
     switch (civilite?.toLowerCase()) {
@@ -116,6 +172,28 @@ const LignePatient :FunctionComponent<JumperLignePatientInterface> = (props :Jum
                         <Skeleton.Rectangle width={120}/>
                     }
                 </BlockSecuriteSociale>
+                
+                <ProchainRendezVous_Container className="prochainRdv">
+                {props.ProchainRdv != null && props.ProchainRdv.length > 0 ?
+
+                    <div className="prochainRdv_container">
+                        {props.CentreEnCours == props.ProchainRdv[0].idCentre &&
+                            <>
+                            <div className="prochainRdv_barreColor" style={{ backgroundColor: '#' + (props.ProchainRdv[0].Couleur ? props.ProchainRdv[0].Couleur : 'ffffff') }}></div>
+                            <div className="prochainRdv_date">
+                                <div className="prochainRdv_date_day">{moment(props.ProchainRdv[0].Date).format('ddd DD MMM')}</div>
+                                <div className="prochainRdv_date_hour">{moment(props.ProchainRdv[0].Date).format('HH:mm')}</div>
+                            </div>
+
+                            </>
+                        }
+                    </div>
+                    :
+                    <div className="prochainRdv_noRdv">
+                        Aucun Rdv
+                </div>
+                }
+                </ProchainRendezVous_Container>
             </>
         </Ligne>
     )

@@ -22,7 +22,7 @@ const Selectable :FunctionComponent<JumperLignePatientInterface> = (props) :Reac
             props.Selectable_onSelect && props.Selectable_onSelect({event, props: {...props}});
         }
         return (
-            <ItemSelectable>
+            <ItemSelectable {...props}>
                 {props.Selectable_Position === 'left'   && <Checkbox CheckBox_onClick={handleClick} {...props} />}
                     {props.children}
                 {props.Selectable_Position === 'right'  && <Checkbox CheckBox_onClick={handleClick} {...props} />}

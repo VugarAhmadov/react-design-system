@@ -31,6 +31,7 @@ export const LignePatientCpt = () => {
 
   return (
     <Lignes.Patient
+    Jumper_idCentre="1"
     Id={infoPatient ? infoPatient.Id: null}
     IdOds={infoPatient ? infoPatient.IdOds: null}
     NomPat={infoPatient ? infoPatient.NomPat: null}
@@ -43,6 +44,8 @@ export const LignePatientCpt = () => {
     Fixe={infoPatient ? infoPatient.Fixe: null}
     Portable={infoPatient ? infoPatient.Portable: null}
     PratReferent={infoPatient ? infoPatient.PratReferent: null}
+    ProchainRdv={infoPatient ? infoPatient.ProchainRdv: null}
+    CentreEnCours={infoPatient ? infoPatient.CentreEnCours: null}
     Ligne_onClick={() => console.log("PATIENT CLICK => ", infoPatient)}
     CheckBox_selected={infoPatient ? infoPatient.Selected: null}
     Selectable_onSelect={()=> setSelected()}

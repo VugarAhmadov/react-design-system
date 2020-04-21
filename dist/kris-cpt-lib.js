@@ -23603,7 +23603,7 @@ const Selectable = (props) => {
             event.stopPropagation();
             props.Selectable_onSelect && props.Selectable_onSelect({ event, props: Object.assign({}, props) });
         };
-        return (external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(ItemSelectable, null,
+        return (external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(ItemSelectable, Object.assign({}, props),
             props.Selectable_Position === 'left' && external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(Generique_checkbox, Object.assign({ CheckBox_onClick: handleClick }, props)),
             props.children,
             props.Selectable_Position === 'right' && external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(Generique_checkbox, Object.assign({ CheckBox_onClick: handleClick }, props))));
@@ -23661,6 +23661,63 @@ display:flex;
 width: 180px;
 align-items:center;
 justify-content: flex-end;
+`;
+const ProchainRendezVous_Container = styled_components_browser_esm["a" /* default */].div `
+&.prochainRdv {
+    margin-left: 40px;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    
+    .prochainRdv_container {
+        display: flex;
+        flex-flow: row;
+        height: 40px;
+    
+        .prochainRdv_barreColor {
+            width: 4px;
+            height: 40px;
+            background-color: red;
+        }
+    
+        .prochainRdv_date {
+            display: flex;
+            flex-flow: column;
+            font-family: Lato;
+            margin-left: 6px;
+            display: flex;
+            justify-content: center;
+    
+            &_day {
+                height: 20px;
+                line-height: 20px;
+                font-size: 11px;
+                color: #666666;
+                width: 100%;
+            }
+    
+            &_hour {
+                height: 20px;
+                line-height: 20px;
+                font-size: 13px;
+                color: #000000;
+                width: 100%;
+            }
+        }
+    }
+    
+    .prochainRdv_noRdv {
+        font-family: LatoItalic;
+        font-size: 11px;
+        color: #97989D;
+        display: flex;
+        padding-left: 10px;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
 `;
 const GetIcone = (civilite) => {
     switch (civilite === null || civilite === void 0 ? void 0 : civilite.toLowerCase()) {
@@ -23723,7 +23780,16 @@ const LignePatient = (props) => {
             external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(BlockSecuriteSociale, null, props.NumINSEE != null ?
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(polices.Objet.SecuriteSocial, { numero: props.NumINSEE, cle: props.ClefINSEE })
                 :
-                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(skeleton.Rectangle, { width: 120 })))));
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(skeleton.Rectangle, { width: 120 })),
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(ProchainRendezVous_Container, { className: "prochainRdv" }, props.ProchainRdv != null && props.ProchainRdv.length > 0 ?
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "prochainRdv_container" }, props.CentreEnCours == props.ProchainRdv[0].idCentre &&
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null,
+                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "prochainRdv_barreColor", style: { backgroundColor: '#' + (props.ProchainRdv[0].Couleur ? props.ProchainRdv[0].Couleur : 'ffffff') } }),
+                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "prochainRdv_date" },
+                            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "prochainRdv_date_day" }, moment_default()(props.ProchainRdv[0].Date).format('ddd DD MMM')),
+                            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "prochainRdv_date_hour" }, moment_default()(props.ProchainRdv[0].Date).format('HH:mm')))))
+                :
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "prochainRdv_noRdv" }, "Aucun Rdv")))));
 };
 LignePatient.defaultProps = {
     NomUsuel: '',
@@ -23789,7 +23855,7 @@ const listePatientCpt = (props) => {
             ?
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, (_a = props.ListePatient_patients) === null || _a === void 0 ? void 0 : _a.map((patient) => {
                     var _a;
-                    return external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(molecules_ligne.Patient, Object.assign({ key: Object(uuidv4["uuid"])(), Id: patient.Id, IdOds: patient.IdOds, NomPat: patient.NomPat, NomUsuel: patient.NomUsuel, Prenom: patient.Prenom, DateNaissance: patient.DateNaissance, Civilite: (_a = patient.Civilite) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase(), NumINSEE: patient.NumINSEE, ClefINSEE: patient.ClefINSEE, Fixe: patient.Fixe, Portable: patient.Portable, PratReferent: patient.PratReferent, CheckBox_selected: patient.Selected }, props));
+                    return external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(molecules_ligne.Patient, Object.assign({ key: Object(uuidv4["uuid"])(), Id: patient.Id, IdOds: patient.IdOds, NomPat: patient.NomPat, NomUsuel: patient.NomUsuel, Prenom: patient.Prenom, DateNaissance: patient.DateNaissance, Civilite: (_a = patient.Civilite) === null || _a === void 0 ? void 0 : _a.toLocaleLowerCase(), NumINSEE: patient.NumINSEE, ClefINSEE: patient.ClefINSEE, Fixe: patient.Fixe, Portable: patient.Portable, PratReferent: patient.PratReferent, CheckBox_selected: patient.Selected, ProchainRdv: patient.ProchainRdv, CentreEnCours: patient.CentreEnCours }, props));
                 }))
             :
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, Array(props.ListePatient_preloadCount).fill(null).map((x, i) => i).map(_ => external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(molecules_ligne.Patient, Object.assign({ key: Object(uuidv4["uuid"])(), Id: undefined, IdOds: undefined, NomPat: undefined, NomUsuel: undefined, Prenom: undefined, DateNaissance: undefined, Civilite: undefined, NumINSEE: undefined, ClefINSEE: undefined, Fixe: undefined, Portable: undefined, PratReferent: undefined, Selectable_isSelectable: false, CheckBox_selected: false }, props)))))));
@@ -23815,13 +23881,114 @@ vertical-align: middle;
 text-align: left;
 margin-left: 20px;
 margin-right: 30px;
-display: -webkit-flex;
 display: flex;
+
+& > p {
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+&.aucun-recent {
+    height: 180px;
+    margin: auto;
+    display: block;
+    padding-top: 50px;
+
+    & p {
+        display: block;
+        font-family: Lato;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        color: #97989D;
+        margin: auto;
+        line-height: 19px;
+        margin-top: 10px;
+    }
+}
+
+& .nb-find {
+    display: inline-block;
+    margin-right: 4px;
+    font-family: Lato;
+    font-size: 18px;
+    color: #333333;
+    line-height: 30px
+}
+
+& small {
+    font-family: LatoItalic;
+    font-size: 13px;
+}
+
+&.aucun {
+    height: 60px;
+    width: 595px;
+    line-height: 18px;
+    height: 180px;
+    display: flex;
+
+    & p {
+        font-family: Lato;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        color: #97989D;
+        margin: auto;
+        line-height: 26px;
+    }
+}
+`;
+const NbFind = styled_components_browser_esm["a" /* default */].div `
+display: inline-block;
+margin-right: 4px;
+font-family: Lato;
+font-size: 18px;
+color: #333333;
+line-height: 30px
 `;
 const RecherchePatient = (props) => {
+    const formatHeader = () => {
+        return props.ListePatient_patients && props.ListePatient_patients.length != 1 && props.ListePatient_patients.length >= 49 ?
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null,
+                "DOSSIERS PATIENTS TROUVES. ",
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("small", null, "Essayez de compl\u00E9ter votre recherche"))
+            : (props.ListePatient_patients.length == 1 ?
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, "DOSSIER PATIENT TROUVE.")
+                :
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, "DOSSIERS PATIENTS TROUVES."));
+    };
+    const header = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, props.InputRecherche_recherche && props.InputRecherche_recherche.length > 3 ?
+        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "header-recherche" }, "DOSSIERS PATIENTS CONSULTES RECEMMENTS")
+        :
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, props.ListePatient_patients && props.ListePatient_patients.length > 0 ?
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(HeaderRecherche, { className: "trouve" },
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(NbFind, null, props.ListePatient_patients.length >= 49 ?
+                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, " + de 50")
+                        :
+                            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, props.ListePatient_patients.length)),
+                    formatHeader())
+                :
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(HeaderRecherche, { className: "aucun" },
+                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null,
+                            "Aucun dossier patient trouv\u00E9 ",
+                            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("br", null),
+                            "Essayez de modifier votre recherche"))));
     const ContenuDeLaPopUp = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null,
-        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(HeaderRecherche, null, "DOSSIERS PATIENTS CONSULTES RECEMMENTS"),
-        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(Patients, Object.assign({ Selectable_Position: 'right' }, props)));
+        header,
+        props.ListePatient_patients && props.ListePatient_patients.length > 0 ?
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(Patients, Object.assign({ Selectable_Position: 'right' }, props))
+            :
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "header-recherche aucun-recent" },
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, "Aucun dossier patient  consult\u00E9 aujourd\u2019hui"),
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null,
+                        "Vous pouvez rechercher par Nom et pr\u00E9nom du client, ",
+                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("br", null),
+                        "date de naissance, num\u00E9ro de s\u00E9cu, ",
+                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("br", null),
+                        "N\u00B0 de facture, de dossier, de FSE\u2026")));
     return (external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(autocomplete, Object.assign({ Autocomplete_resultats: ContenuDeLaPopUp, Input_noLabel: true }, props)));
 };
 /* harmony default export */ var Jumpers_RecherchePatient = (RecherchePatient);
