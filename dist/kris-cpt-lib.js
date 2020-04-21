@@ -23908,8 +23908,6 @@ display: flex;
     }
 }
 
-
-
 &.aucun {
     height: 60px;
     width: 595px;
@@ -23948,6 +23946,18 @@ display: flex;
 }
 `;
 const InfosContent = styled_components_browser_esm["a" /* default */].div `
+min-height: 180px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: Lato;
+font-style: italic;
+font-weight: bold;
+font-size: 16px;
+text-align: center;
+color: #97989D;
+margin: auto;
+line-height: 26px;
 `;
 const NbFind = styled_components_browser_esm["a" /* default */].div `
 display: inline-block;
@@ -23970,7 +23980,7 @@ const RecherchePatient = (props) => {
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null, `DOSSIER PATIENT TROUVE${count > 1 ? 'S' : ''}.`);
     };
     const header = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, !isRechercheActive ?
-        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null, "DOSSIERS PATIENTS CONSULTES RECEMMENTS")
+        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, hasResultats && external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null, "DOSSIERS PATIENTS CONSULTES RECEMMENTS"))
         :
             external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, hasResultats &&
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(InfosHeader, null,
