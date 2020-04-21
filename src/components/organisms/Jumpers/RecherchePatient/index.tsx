@@ -111,7 +111,7 @@ const RecherchePatient = (props :JumperPatientInterface) => {
     <>
         {props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis ?
             <>
-                <div className="header-recherche">DOSSIERS PATIENTS CONSULTES RECEMMENTS</div>
+                <HeaderRecherche>DOSSIERS PATIENTS CONSULTES RECEMMENTS</HeaderRecherche>
                 {props.ListePatient_patients && props.ListePatient_patients.length == 0 &&
                     <HeaderRecherche className="aucun-recent">
                         <p>Aucun dossier patient  consulté aujourd’hui</p>
