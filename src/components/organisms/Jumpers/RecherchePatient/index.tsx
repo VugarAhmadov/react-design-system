@@ -109,7 +109,7 @@ const RecherchePatient = (props :JumperPatientInterface) => {
 
     const header = 
     <>
-        {props.InputRecherche_recherche && props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis ?
+        {!props.InputRecherche_recherche && props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis ?
             <>
                 <div className="header-recherche">DOSSIERS PATIENTS CONSULTES RECEMMENTS</div>
                 {props.ListePatient_patients && props.ListePatient_patients.length == 0 &&
