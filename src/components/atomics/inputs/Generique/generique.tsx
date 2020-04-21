@@ -104,7 +104,7 @@ const InputGenerique = (props :InputProps) => {
         props.Input_setError && props.Input_setError(message);
         props.Input_onBlur && props.Input_onBlur({
             value: value,
-            isValid: props.Input_validation(value),
+            isValid: props.Input_validation ? props.Input_validation(value) : true,
             inputElement: inputRef.current
         })
     }
@@ -114,7 +114,7 @@ const InputGenerique = (props :InputProps) => {
         props.Input_setError && props.Input_setError(null);
         props.Input_onFocus && props.Input_onFocus({
             value: value,
-            isValid: props.Input_validation(value),
+            isValid: props.Input_validation ? props.Input_validation(value) : true,
             inputElement: inputRef.current
         })
     }
@@ -179,7 +179,8 @@ InputGenerique.defaultProps = {
     Input_maxlength: 99999,
     Input_required: false,
     Input_autoFocus: false,
-    Input_error: false
+    Input_error: false,
+    Input_validation: (value:string) => true
 }
 
 // On attache le comportement avecLabelEstErreur au composant

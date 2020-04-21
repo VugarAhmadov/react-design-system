@@ -41,9 +41,9 @@ export default (props :propsRechercheInterface) => {
     const Icone = active ? <Icones.Croix onClick={reset} /> : <Icones.Loupe style={{color: '#727272',  opacity: 0.5}}/>
     
     const handleKeyPress = (event :InputGeneriqueEvent) => {
+        // On appel la fonction Parente en cas ou on veut attacher un comportement
         props.InputRecherche_lanceRecherche && props.InputRecherche_lanceRecherche(event.value)
         if (event.key === 'Enter') {
-            // On appel la fonction Parente en cas ou on veut attacher un comportement
             event.inputElement?.blur()
         }
     }

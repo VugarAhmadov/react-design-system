@@ -22958,7 +22958,7 @@ const InputGenerique = (props) => {
         props.Input_setError && props.Input_setError(message);
         props.Input_onBlur && props.Input_onBlur({
             value: value,
-            isValid: props.Input_validation(value),
+            isValid: props.Input_validation ? props.Input_validation(value) : true,
             inputElement: inputRef.current
         });
     };
@@ -22967,7 +22967,7 @@ const InputGenerique = (props) => {
         props.Input_setError && props.Input_setError(null);
         props.Input_onFocus && props.Input_onFocus({
             value: value,
-            isValid: props.Input_validation(value),
+            isValid: props.Input_validation ? props.Input_validation(value) : true,
             inputElement: inputRef.current
         });
     };
@@ -23003,7 +23003,8 @@ InputGenerique.defaultProps = {
     Input_maxlength: 99999,
     Input_required: false,
     Input_autoFocus: false,
-    Input_error: false
+    Input_error: false,
+    Input_validation: (value) => true
 };
 // On attache le comportement avecLabelEstErreur au composant
 /* harmony default export */ var generique = (HOC_wrapper(InputGenerique));
@@ -23187,9 +23188,9 @@ monsieur_Icone.defaultProps = {
     const Icone = active ? external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(icones.Croix, { onClick: reset }) : external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(icones.Loupe, { style: { color: '#727272', opacity: 0.5 } });
     const handleKeyPress = (event) => {
         var _a;
+        // On appel la fonction Parente en cas ou on veut attacher un comportement
         props.InputRecherche_lanceRecherche && props.InputRecherche_lanceRecherche(event.value);
         if (event.key === 'Enter') {
-            // On appel la fonction Parente en cas ou on veut attacher un comportement
             (_a = event.inputElement) === null || _a === void 0 ? void 0 : _a.blur();
         }
     };
