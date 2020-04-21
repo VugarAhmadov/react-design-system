@@ -34,8 +34,9 @@ export default (props :propsRechercheInterface) => {
     const reset = () => {
         if (props.InputRecherche_onReset ) {
             props.InputRecherche_onReset()
+        } else {
+            throw new Error('InputRecherche_onReset() doit être implémenté pour le click sur l\'icone !');
         }
-        throw new Error('InputRecherche_onReset() doit être implémenté pour le click sur l\'icone !');
     }
     
     const Icone = active ? <Icones.Croix onClick={reset} /> : <Icones.Loupe style={{color: '#727272',  opacity: 0.5}}/>
