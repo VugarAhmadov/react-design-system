@@ -9,8 +9,7 @@ import { BullePropsInterface } from '../../../atomics/bulles/default';
 import Polices from '../../../atomics/polices'; 
 
 export interface JumperPatientInterface extends AutocompletePropsInterface, BullePropsInterface, ListePatientsInterface {
-    Jumper_isPatientRecent  :boolean;
-    Recherche_minimumRequis?:number;
+    RecherchePatient_minimumRequis :number;
 }
 
 const HeaderRecherche = styled.div`
@@ -110,7 +109,7 @@ const RecherchePatient = (props :JumperPatientInterface) => {
 
     const header = 
     <>
-        {props.InputRecherche_recherche && props.InputRecherche_recherche.length < props.Recherche_minimumRequis ?
+        {props.InputRecherche_recherche && props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis ?
             <div className="header-recherche">DOSSIERS PATIENTS CONSULTES RECEMMENTS</div>
         :
             <>
@@ -167,7 +166,7 @@ const RecherchePatient = (props :JumperPatientInterface) => {
 };
 
 RecherchePatient.defaultProps = {
-    Recherche_minimumRequis: 3
+    RecherchePatient_minimumRequis: 3
 }
 
 export default RecherchePatient

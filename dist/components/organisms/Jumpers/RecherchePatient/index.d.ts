@@ -3,7 +3,12 @@ import { AutocompletePropsInterface } from '../../../molecules/inputs/autocomple
 import { ListePatientsInterface } from '../../Listes/Patients';
 import { BullePropsInterface } from '../../../atomics/bulles/default';
 export interface JumperPatientInterface extends AutocompletePropsInterface, BullePropsInterface, ListePatientsInterface {
-    Jumper_isPatientRecent: boolean;
+    RecherchePatient_minimumRequis: number;
 }
-declare const RecherchePatient: (props: JumperPatientInterface) => JSX.Element;
+declare const RecherchePatient: {
+    (props: JumperPatientInterface): JSX.Element;
+    defaultProps: {
+        RecherchePatient_minimumRequis: number;
+    };
+};
 export default RecherchePatient;
