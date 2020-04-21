@@ -105,9 +105,9 @@ const LignePatient :FunctionComponent<JumperLignePatientInterface> = (props :Jum
                 />
                 <BlockNumero>
                     <div style={{height:'35px', alignItems:'center', display:'flex'}}>
-                        {props.Fixe != null && props.NomPat != null ? <Polices.Objet.Telephone numero={props.Fixe} /> : <Skeleton.Rectangle />}
+                        {props.NomPat != null ? <Polices.Objet.Telephone numero={props.Fixe ? props.Fixe : ''} /> : <Skeleton.Rectangle />}
                     </div>
-                    {props.Portable != null && props.NomPat != null ? <Polices.Objet.Telephone numero={props.Portable} /> : <Skeleton.Rectangle />}
+                    {props.NomPat != null ? <Polices.Objet.Telephone numero={props.Portable ? props.Portable : ''} /> : <Skeleton.Rectangle />}
                 </BlockNumero>
                 <BlockSecuriteSociale>
                     {props.NumINSEE != null ? 
