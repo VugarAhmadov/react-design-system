@@ -23961,7 +23961,17 @@ const RecherchePatient = (props) => {
                     external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, "DOSSIERS PATIENTS TROUVES."));
     };
     const header = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, props.InputRecherche_recherche && props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis ?
-        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "header-recherche" }, "DOSSIERS PATIENTS CONSULTES RECEMMENTS")
+        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null,
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "header-recherche" }, "DOSSIERS PATIENTS CONSULTES RECEMMENTS"),
+            props.ListePatient_patients && props.ListePatient_patients.length == 0 &&
+                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(HeaderRecherche, { className: "aucun-recent" },
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, "Aucun dossier patient  consult\u00E9 aujourd\u2019hui"),
+                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null,
+                        "Vous pouvez rechercher par Nom et pr\u00E9nom du client, ",
+                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("br", null),
+                        "date de naissance, num\u00E9ro de s\u00E9cu, ",
+                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("br", null),
+                        "N\u00B0 de facture, de dossier, de FSE\u2026")))
         :
             external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, props.ListePatient_patients && props.ListePatient_patients.length > 0 ?
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(HeaderRecherche, { className: "trouve" },
@@ -23978,17 +23988,8 @@ const RecherchePatient = (props) => {
                             "Essayez de modifier votre recherche"))));
     const ContenuDeLaPopUp = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null,
         header,
-        props.ListePatient_patients && props.ListePatient_patients.length > 0 ?
-            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(Patients, Object.assign({ Selectable_Position: 'right' }, props))
-            :
-                external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "header-recherche aucun-recent" },
-                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, "Aucun dossier patient  consult\u00E9 aujourd\u2019hui"),
-                    external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null,
-                        "Vous pouvez rechercher par Nom et pr\u00E9nom du client, ",
-                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("br", null),
-                        "date de naissance, num\u00E9ro de s\u00E9cu, ",
-                        external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("br", null),
-                        "N\u00B0 de facture, de dossier, de FSE\u2026")));
+        props.ListePatient_patients && props.ListePatient_patients.length > 0 &&
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(Patients, Object.assign({ Selectable_Position: 'right' }, props)));
     return (external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(autocomplete, Object.assign({ Autocomplete_resultats: ContenuDeLaPopUp, Input_noLabel: true }, props)));
 };
 RecherchePatient.defaultProps = {

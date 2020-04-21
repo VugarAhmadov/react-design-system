@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react'
 import Selectable, { SelectableInterface } from '../comportements/selectable'
 import styled from 'styled-components'
 import { handleClickInterface } from '../../../interfaces/handle_click'
-import { JumperLignePatientInterface } from '../../molecules/ligne/patient'
 
 const Ligne = styled.div`
 height: ${(props :any) => props.height ? props.height : '60px'};

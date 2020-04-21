@@ -110,7 +110,19 @@ const RecherchePatient = (props :JumperPatientInterface) => {
     const header = 
     <>
         {props.InputRecherche_recherche && props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis ?
-            <div className="header-recherche">DOSSIERS PATIENTS CONSULTES RECEMMENTS</div>
+            <>
+                <div className="header-recherche">DOSSIERS PATIENTS CONSULTES RECEMMENTS</div>
+                {props.ListePatient_patients && props.ListePatient_patients.length == 0 &&
+                    <HeaderRecherche className="aucun-recent">
+                        <p>Aucun dossier patient  consulté aujourd’hui</p>
+                        <p>
+                            Vous pouvez rechercher par Nom et prénom du client, <br />
+                            date de naissance, numéro de sécu, <br />
+                            N° de facture, de dossier, de FSE…
+                        </p>
+                    </HeaderRecherche>                
+                }
+            </>
         :
             <>
                 { props.ListePatient_patients && props.ListePatient_patients.length > 0 ?
@@ -139,20 +151,11 @@ const RecherchePatient = (props :JumperPatientInterface) => {
     const ContenuDeLaPopUp = 
     <>
         {header}
-        {props.ListePatient_patients && props.ListePatient_patients.length > 0 ?
+        {props.ListePatient_patients && props.ListePatient_patients.length > 0 &&
             <ListePatient
                 Selectable_Position='right'
                 {...props}
-            />        
-        :
-            <div className="header-recherche aucun-recent">
-                <p>Aucun dossier patient  consulté aujourd’hui</p>
-                <p>
-                    Vous pouvez rechercher par Nom et prénom du client, <br />
-                    date de naissance, numéro de sécu, <br />
-                    N° de facture, de dossier, de FSE…
-                </p>
-            </div>
+            />
         }
     </>
 
