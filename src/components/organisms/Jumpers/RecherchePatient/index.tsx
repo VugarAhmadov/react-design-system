@@ -98,12 +98,12 @@ const RecherchePatient = (props :JumperPatientInterface) => {
     const formatHeader = () => {
         return  props.ListePatient_patients && props.ListePatient_patients.length != 1 && props.ListePatient_patients.length >= 49 ?
 
-            <p>DOSSIERS PATIENTS TROUVES. <small>Essayez de compléter votre recherche</small></p>
+            <HeaderRecherche className="trouve">DOSSIERS PATIENTS TROUVES. <small>Essayez de compléter votre recherche</small></HeaderRecherche>
             : (
                 props.ListePatient_patients.length == 1 ?
-                    <p>DOSSIER PATIENT TROUVE.</p>
+                    <HeaderRecherche>DOSSIER PATIENT TROUVE.</HeaderRecherche>
                     :
-                    <p>DOSSIERS PATIENTS TROUVES.</p>
+                    <HeaderRecherche>DOSSIERS PATIENTS TROUVES.</HeaderRecherche>
             )
     };
 
@@ -113,20 +113,20 @@ const RecherchePatient = (props :JumperPatientInterface) => {
             <>
                 <HeaderRecherche>DOSSIERS PATIENTS CONSULTES RECEMMENTS</HeaderRecherche>
                 {props.ListePatient_patients && props.ListePatient_patients.length == 0 &&
-                    <HeaderRecherche className="aucun-recent">
-                        <p>Aucun dossier patient  consulté aujourd’hui</p>
+                    <>
+                        <HeaderRecherche className="aucun-recent">Aucun dossier patient  consulté aujourd’hui</HeaderRecherche>
                         <p>
                             Vous pouvez rechercher par Nom et prénom du client, <br />
                             date de naissance, numéro de sécu, <br />
                             N° de facture, de dossier, de FSE…
                         </p>
-                    </HeaderRecherche>                
+                    </>                
                 }
             </>
         :
             <>
                 { props.ListePatient_patients && props.ListePatient_patients.length > 0 ?
-                    <HeaderRecherche className="trouve">
+                    < >
                         <NbFind>
                             {props.ListePatient_patients.length >= 49 ?
                                 <p> + de 50</p>
@@ -135,13 +135,11 @@ const RecherchePatient = (props :JumperPatientInterface) => {
                             }
                         </NbFind>
                         {formatHeader()}
-                    </HeaderRecherche>
+                    </>
                 :
                     <HeaderRecherche className="aucun">
-                        <p>
                             Aucun dossier patient trouvé <br />
                             Essayez de modifier votre recherche
-                        </p>
                     </HeaderRecherche>
                 }
             </>
