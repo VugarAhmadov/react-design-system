@@ -50,20 +50,6 @@ display: flex;
     }
 }
 
-& .nb-find {
-    display: inline-block;
-    margin-right: 4px;
-    font-family: Lato;
-    font-size: 18px;
-    color: #333333;
-    line-height: 30px
-}
-
-& small {
-    font-family: LatoItalic;
-    font-size: 13px;
-}
-
 &.aucun {
     height: 60px;
     width: 595px;
@@ -84,6 +70,28 @@ display: flex;
 }
 ` 
 
+const InfosHeader = styled.div`
+height: 60px;
+width: 595px;
+color: #97989D;
+font-family: Lato;
+font-size: 13px;
+line-height: 60px;
+vertical-align: middle;
+text-align: left;
+margin-left: 20px;
+margin-right: 30px;
+display: flex;
+
+& small {
+    font-family: LatoItalic;
+    font-size: 13px;
+}
+`
+
+const InfosContent = styled.div`
+`
+
 const NbFind = styled.div`
 display: inline-block;
 margin-right: 4px;
@@ -95,38 +103,25 @@ line-height: 30px
 
 const RecherchePatient = (props :JumperPatientInterface) => {
 
-    const formatHeader = () => {
-        return  props.ListePatient_patients && props.ListePatient_patients.length != 1 && props.ListePatient_patients.length >= 49 ?
+    const isRechercheActive     :boolean = !(props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis);
+    const hasResultats          :boolean = props.ListePatient_patients && props.ListePatient_patients.length > 0
 
-            <HeaderRecherche className="trouve">DOSSIERS PATIENTS TROUVES. <small>Essayez de compléter votre recherche</small></HeaderRecherche>
-            : (
-                props.ListePatient_patients.length == 1 ?
-                    <HeaderRecherche>DOSSIER PATIENT TROUVE.</HeaderRecherche>
-                    :
-                    <HeaderRecherche>DOSSIERS PATIENTS TROUVES.</HeaderRecherche>
-            )
+    const formatHeader = () => {
+        let count = props.ListePatient_patients.length
+        return count >= 49 ?
+            <InfosHeader>DOSSIERS PATIENTS TROUVES. <small>Essayez de compléter votre recherche</small></InfosHeader>
+            :
+            <InfosHeader>{`DOSSIER PATIENT TROUVE${count > 1 ? 'S' : ''}.`}</InfosHeader>            
     };
 
     const header = 
     <>
-        {props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis ?
-            <>
-                <HeaderRecherche>DOSSIERS PATIENTS CONSULTES RECEMMENTS</HeaderRecherche>
-                {props.ListePatient_patients && props.ListePatient_patients.length == 0 &&
-                    <>
-                        <HeaderRecherche className="aucun-recent">Aucun dossier patient  consulté aujourd’hui</HeaderRecherche>
-                        <p>
-                            Vous pouvez rechercher par Nom et prénom du client, <br />
-                            date de naissance, numéro de sécu, <br />
-                            N° de facture, de dossier, de FSE…
-                        </p>
-                    </>                
-                }
-            </>
+        {!isRechercheActive ?
+            <InfosHeader>DOSSIERS PATIENTS CONSULTES RECEMMENTS</InfosHeader>
         :
             <>
-                { props.ListePatient_patients && props.ListePatient_patients.length > 0 ?
-                    < >
+                {hasResultats &&
+                    <InfosHeader>
                         <NbFind>
                             {props.ListePatient_patients.length >= 49 ?
                                 <p> + de 50</p>
@@ -135,12 +130,40 @@ const RecherchePatient = (props :JumperPatientInterface) => {
                             }
                         </NbFind>
                         {formatHeader()}
-                    </>
+                    </InfosHeader>
+                }
+            </>
+        }
+    </>
+
+    const body = 
+    <>
+        {!isRechercheActive ? 
+            <>
+                {hasResultats ?
+                    <InfosContent>
+                        Vous pouvez rechercher par Nom et prénom du client, <br />
+                        date de naissance, numéro de sécu, <br />
+                        N° de facture, de dossier, de FSE…
+                    </InfosContent>
                 :
-                    <HeaderRecherche className="aucun">
-                            Aucun dossier patient trouvé <br />
-                            Essayez de modifier votre recherche
-                    </HeaderRecherche>
+                <InfosContent>Aucun dossier patient  consulté aujourd’hui</InfosContent>
+                }                    
+            </>
+        :
+            <>
+                {hasResultats ?
+                    <InfosContent>
+                        <ListePatient
+                        Selectable_Position='right'
+                        {...props}
+                        />
+                    </InfosContent>
+                    :
+                    <InfosContent>
+                        Aucun dossier patient trouvé <br />
+                        Essayez de modifier votre recherche
+                    </InfosContent>                
                 }
             </>
         }
@@ -149,12 +172,7 @@ const RecherchePatient = (props :JumperPatientInterface) => {
     const ContenuDeLaPopUp = 
     <>
         {header}
-        {props.ListePatient_patients && props.ListePatient_patients.length > 0 &&
-            <ListePatient
-                Selectable_Position='right'
-                {...props}
-            />
-        }
+        {body}
     </>
 
     return (
