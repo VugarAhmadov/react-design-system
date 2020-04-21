@@ -23962,7 +23962,7 @@ const RecherchePatient = (props) => {
     };
     const header = external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null, props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis ?
         external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.Fragment, null,
-            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", { className: "header-recherche" }, "DOSSIERS PATIENTS CONSULTES RECEMMENTS"),
+            external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(HeaderRecherche, null, "DOSSIERS PATIENTS CONSULTES RECEMMENTS"),
             props.ListePatient_patients && props.ListePatient_patients.length == 0 &&
                 external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(HeaderRecherche, { className: "aucun-recent" },
                     external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("p", null, "Aucun dossier patient  consult\u00E9 aujourd\u2019hui"),
