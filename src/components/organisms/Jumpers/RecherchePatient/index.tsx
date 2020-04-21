@@ -90,6 +90,18 @@ display: flex;
 `
 
 const InfosContent = styled.div`
+min-height: 180px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: Lato;
+font-style: italic;
+font-weight: bold;
+font-size: 16px;
+text-align: center;
+color: #97989D;
+margin: auto;
+line-height: 26px;
 `
 
 const NbFind = styled.div`
@@ -117,7 +129,9 @@ const RecherchePatient = (props :JumperPatientInterface) => {
     const header = 
     <>
         {!isRechercheActive ?
-            <InfosHeader>DOSSIERS PATIENTS CONSULTES RECEMMENTS</InfosHeader>
+            <>
+                {hasResultats && <InfosHeader>DOSSIERS PATIENTS CONSULTES RECEMMENTS</InfosHeader>}
+            </>
         :
             <>
                 {hasResultats &&
