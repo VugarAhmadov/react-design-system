@@ -116,7 +116,7 @@ align-items: center;
 
 const RecherchePatient = (props :JumperPatientInterface) => {
 
-    const isRechercheActive     :boolean = !(props.InputRecherche_recherche.length < props.RecherchePatient_minimumRequis);
+    const isRechercheActive     :boolean = !(props.InputRecherche_recherche.length <= props.RecherchePatient_minimumRequis);
     const hasResultats          :boolean = props.ListePatient_patients && props.ListePatient_patients.length > 0
 
     const formatHeader = () => {
